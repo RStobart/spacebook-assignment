@@ -1,21 +1,19 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import LoginScreen from './screens/login.js'
-import ProfileScreen from './screens/profile.js'
-import TestScreen from './screens/test.js'
-import LogoutScreen from './screens/logout.js'
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LoginScreen from './screens/login.js';
+import SignupScreen from './screens/signup.js';
+import TestScreen from './screens/test.js';
 
-const drawer = createDrawerNavigator();
+const stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <drawer.Navigator initialRouteName="Login">
-        <drawer.Screen name="Login" component={LoginScreen} />
-        <drawer.Screen name="Profile" component={ProfileScreen} />
-        <drawer.Screen name="butts" component={TestScreen} />
-        <drawer.Screen name="Logout" component={LogoutScreen} />
-      </drawer.Navigator>
+      <stack.Navigator initialRouteName="Login">
+        <stack.Screen name="Login" component={LoginScreen} />
+        <stack.Screen name="butts" component={TestScreen} />
+        <stack.Screen name="Signup" component={SignupScreen} />
+      </stack.Navigator>
     </NavigationContainer>
   );
 }

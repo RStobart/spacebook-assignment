@@ -1,10 +1,11 @@
 import { Component } from "react/cjs/react.production.min";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import ProfileScreen from './profile.js';
-import LogoutScreen from './logout.js';
-import SearchScreen from './search.js';
-import FriendReqScreen from './friendreqs.js';
-import FriendsScreen from './friends.js';
+import ProfileScreen from '../screens/profile.js';
+import LogoutScreen from '../screens/logout.js';
+import SearchScreen from '../screens/search.js';
+import FriendReqScreen from '../screens/friendreqs.js';
+import FriendsScreen from '../screens/friends.js';
+import EditDetailsScreen from "./editdetails.js";
 
 class TestScreen extends Component{
     constructor(props){
@@ -22,6 +23,7 @@ class TestScreen extends Component{
                     <drawer.Screen name="Friends" component={FriendsScreen} />
                     <drawer.Screen name="Search" component={SearchScreen} />
                     <drawer.Screen name="Friend Requests" component={FriendReqScreen} />
+                    <drawer.Screen name="Edit profile" component={EditDetailsScreen} />
                     <drawer.Screen name="Logout" component={LogoutScreen} />
                 </drawer.Navigator>
         )

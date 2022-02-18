@@ -70,11 +70,13 @@ class ProfileScreen extends Component{
     render(){
 
         let postList = [];
+        let keyNum = 0;
 
         this.state.user_posts.forEach((thisPost) => {
             postList.push(
-                <Post post={thisPost} />
+                <Post key={keyNum} post={thisPost} />
             );
+            keyNum++;
         });
 
         return(

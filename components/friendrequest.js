@@ -1,21 +1,21 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import { Button } from "react-native-web";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-class Post extends Component{
+class FriendRequest extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            liked: "like"
+            friend: false
         }
     }
 
-    like = async () => {
-        let postId = this.props.post.post_id;
-        let userId = this.props.post.author.user_id;
+    accept = async () => {
+        let userId = this.props.user.user_id;
         let userToken = await AsyncStorage.getItem("@session_token");
-        return fetch("http://localhost:3333/api/1.0.0/user/" + userId + "/post/" + postId + "/like", {
+        return fetch("http://localhost:3333/api/1.0.0/friendrequests/" + userId, {
             method: 'POST',
             headers: {
                 'X-Authorization': userToken
@@ -24,7 +24,7 @@ class Post extends Component{
         .then((response) => {
             if(response.status === 200){
                 return this.setState({
-                    liked: "unlike"
+                    friend: true
                 });
             }else if(response.status === 401){
                 //Unauthorised
@@ -37,11 +37,10 @@ class Post extends Component{
     }
 
     
-    unlike = async () => {
-        let postId = this.props.post.post_id;
-        let userId = this.props.post.author.user_id;
+    reject = async () => {
+        let userId = this.props.user.user_id;
         let userToken = await AsyncStorage.getItem("@session_token");
-        return fetch("http://localhost:3333/api/1.0.0/user/" + userId + "/post/" + postId + "/like", {
+        return fetch("http://localhost:3333/api/1.0.0/friendrequests/" + userId, {
             method: 'DELETE',
             headers: {
                 'X-Authorization': userToken
@@ -49,9 +48,7 @@ class Post extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                return this.setState({
-                    liked: "like"
-                });
+                //Rejection, proceed to cry
             }else if(response.status === 401){
                 //Unauthorised
             }else if(response.status === 404){
@@ -65,13 +62,13 @@ class Post extends Component{
     render(){
         return(
             <View>
-                <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
-                <Text>{this.props.post.text}</Text>
-                <Text>{this.props.post.timestamp}</Text>
-                <Button onPress={() => this.like()} title={this.state.liked}/>
+                <Text>{this.props.user.first_name} {this.props.user.last_name} wants to be friends</Text>
+                <Button onPress={() => this.accept()} title="Accept"/>
+                <Button onPress={() => this.reject()} title="Reject"/>
+
             </View>
         )
     }
 }
 
-export default Post;
+export default FriendRequest;

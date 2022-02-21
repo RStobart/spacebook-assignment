@@ -19,7 +19,7 @@ class TestScreen extends Component{
 
         return(
                 <drawer.Navigator initialRouteName="Profile">
-                    <drawer.Screen name="Profile" component={ProfileScreen} />
+                    <drawer.Screen name="Profile" component={ProfileScreen} initialParams={{userId: this.props.route.params.userId}}/>
                     <drawer.Screen name="Friends" component={FriendsScreen} />
                     <drawer.Screen name="Search" component={SearchScreen} />
                     <drawer.Screen name="Friend Requests" component={FriendReqScreen} />

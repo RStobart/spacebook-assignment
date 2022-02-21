@@ -10,16 +10,34 @@ class ProfileScreen extends Component{
 
         this.state = {
             logged_user_info : {},
-            user_posts: []
+            user_posts: [],
+            own_profile: false
         };
+        
+    }
 
-        this.getUserDetails();
-        this.getUserPosts();
+    componentDidMount() {
+        this.checkIfOwnProfile();
     }
     
-    getUserDetails = async () => {
+    checkIfOwnProfile = async () => { 
+        await AsyncStorage.getItem("@user_id").then((ownId) => {
+            console.log(ownId);
+            console.log(this.props.route.params.userId);
+            if(ownId === this.props.route.params.userId){
+                this.setState({own_profile: true});
+                this.getUserDetails(ownId);
+                this.getUserPosts(ownId);
+            }
+            else{
+                this.getUserDetails(this.props.userId);
+                this.getUserPosts(this.props.userId);
+            }
+        });
+    }
+    
+    getUserDetails = async (userId) => {
         let userToken = await AsyncStorage.getItem("@session_token");
-        let userId = await AsyncStorage.getItem("@user_id");
         return fetch("http://localhost:3333/api/1.0.0/user/" + userId, {
             method: 'GET',
             headers: {
@@ -42,9 +60,8 @@ class ProfileScreen extends Component{
         })
     }
 
-    getUserPosts = async () => {
+    getUserPosts = async (userId) => {
         let userToken = await AsyncStorage.getItem("@session_token");
-        let userId = await AsyncStorage.getItem("@user_id");
         return fetch("http://localhost:3333/api/1.0.0/user/" + userId + "/post", {
             method: 'GET',
             headers: {
@@ -65,6 +82,12 @@ class ProfileScreen extends Component{
         .then(async (user_posts) => {
             this.setState({user_posts});
         })
+    }
+
+    loadOwnDetailsAndPosts = async () => {
+        let userId = await AsyncStorage.getItem("@user_id");
+        this.getUserDetails(userId);
+        this.getUserPosts(userId);
     }
 
     render(){

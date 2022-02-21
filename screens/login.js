@@ -12,6 +12,15 @@ class LoginScreen extends Component {
             email : "",
             password : ""
         }
+        
+    }
+    
+    checkForLogin = async () => {
+        let potentialToken = await AsyncStorage.getItem("@session_token");
+        let potentialId = await AsyncStorage.getItem("@user_id");
+        if(potentialToken != null && potentialId != null){
+            this.props.navigation.navigate("butts", {userId: potentialId});
+        }
     }
 
     login = async () => {
@@ -34,11 +43,13 @@ class LoginScreen extends Component {
         .then(async (responseJson) => {
             await AsyncStorage.setItem('@user_id', responseJson.id)
             await AsyncStorage.setItem('@session_token', responseJson.token);
-            this.props.navigation.navigate("butts");
+            this.props.navigation.navigate("butts", {userId: responseJson.id});
         })
     }
 
     render(){
+        this.checkForLogin();
+
         return(
             <View>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />

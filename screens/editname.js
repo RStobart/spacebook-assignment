@@ -21,6 +21,7 @@ class EditNameScreen extends Component{
         return fetch("http://localhost:3333/api/1.0.0/user/" + userId, {
             method: 'PATCH',
             headers: {
+                'Content-Type': 'application/json',
                 'X-Authorization': userToken
             },
             body: JSON.stringify(this.state)

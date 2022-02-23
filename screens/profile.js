@@ -9,11 +9,13 @@ class ProfileScreen extends Component{
         super(props);
 
         this.state = {
-            logged_user_info : {},
+            user_info : {},
             user_posts: [],
-            own_profile: false
+            own_profile: false,
+            logged_user_id: ""
         };
         
+        this.props.navigation.setOptions({ headerShown: false });
     }
 
     componentDidMount() {
@@ -21,19 +23,17 @@ class ProfileScreen extends Component{
     }
     
     checkIfOwnProfile = async () => { 
-        await AsyncStorage.getItem("@user_id").then((ownId) => {
-            console.log(ownId);
-            console.log(this.props.route.params.userId);
-            if(ownId === this.props.route.params.userId){
-                this.setState({own_profile: true});
-                this.getUserDetails(ownId);
-                this.getUserPosts(ownId);
-            }
-            else{
-                this.getUserDetails(this.props.userId);
-                this.getUserPosts(this.props.userId);
-            }
-        });
+        let ownId = await AsyncStorage.getItem("@user_id")
+        this.setState({logged_user_id: ownId})
+        if(ownId === this.props.route.params.userId){
+            this.setState({own_profile: true});
+            this.getUserDetails(ownId);
+            this.getUserPosts(ownId);
+        }
+        else{
+            this.getUserDetails(this.props.route.params.userId);
+            this.getUserPosts(this.props.route.params.userId);
+        }
     }
     
     getUserDetails = async (userId) => {
@@ -55,8 +55,8 @@ class ProfileScreen extends Component{
                 //500
             }
         })
-        .then(async (logged_user_info) => {
-            this.setState({logged_user_info});
+        .then(async (user_info) => {
+            this.setState({user_info});
         })
     }
 
@@ -97,14 +97,14 @@ class ProfileScreen extends Component{
 
         this.state.user_posts.forEach((thisPost) => {
             postList.push(
-                <Post key={keyNum} post={thisPost} />
+                <Post key={keyNum} post={thisPost} logged_user_id={this.state.logged_user_id} navigation={this.props.navigation} />
             );
             keyNum++;
         });
 
         return(
             <View>
-                <Text>Name: {this.state.logged_user_info.first_name} {this.state.logged_user_info.last_name}</Text>
+                <Text>Name: {this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
                 <Text>Friends: </Text>
                 <Text>Posts: </Text>
                 {postList}

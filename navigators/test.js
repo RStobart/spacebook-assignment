@@ -1,6 +1,6 @@
 import { Component } from "react/cjs/react.production.min";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import ProfileScreen from '../screens/profile.js';
+import ProfileNavScreen from '../navigators/profilepostnav.js';
 import LogoutScreen from '../screens/logout.js';
 import SearchScreen from '../screens/search.js';
 import FriendReqScreen from '../screens/friendreqs.js';
@@ -18,8 +18,8 @@ class TestScreen extends Component{
         const drawer = createDrawerNavigator();
 
         return(
-                <drawer.Navigator initialRouteName="Profile">
-                    <drawer.Screen name="Profile" component={ProfileScreen} initialParams={{userId: this.props.route.params.userId}}/>
+                <drawer.Navigator initialRouteName="ProfileNav">
+                    <drawer.Screen name="ProfileNav" component={ProfileNavScreen} options={{title: "Profile"}} initialParams={{userId: this.props.route.params.userId}}/>
                     <drawer.Screen name="Friends" component={FriendsScreen} />
                     <drawer.Screen name="Search" component={SearchScreen} />
                     <drawer.Screen name="Friend Requests" component={FriendReqScreen} />

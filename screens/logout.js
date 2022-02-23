@@ -16,8 +16,10 @@ class LogoutScreen extends Component {
                 'X-Authorization': userToken
             }
         })
-        .then((response) => {
+        .then(async (response) => {
             if(response.status === 200){
+                await AsyncStorage.removeItem("@user_id");
+                await AsyncStorage.removeItem("@session_token");
                 this.props.navigation.navigate("Login");
             }else if(response.status === 400){
                 //Invalid email or password

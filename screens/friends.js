@@ -1,6 +1,7 @@
 import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Friend from "../components/friend";
 
 class FriendsScreen extends Component {
     constructor(props){
@@ -43,7 +44,7 @@ class FriendsScreen extends Component {
 
         this.state.friends.forEach((thisFriend) => {
             friendResults.push(
-                <Text key={keyNum}>{thisFriend.user_givenname} {thisFriend.user_familyname}</Text>
+                <Friend key={keyNum} user={thisFriend} />
             );
             keyNum++;
         });

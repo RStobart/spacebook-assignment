@@ -4,12 +4,12 @@ import EditMenuScreen from '../screens/editmenu.js';
 import EditNameScreen from '../screens/editname.js';
 import EditEmailScreen from '../screens/editemail.js';
 import EditPasswordScreen from '../screens/editpassword.js';
+import EditPhotoScreen from '../screens/editphoto.js';
 
 class EditDetailsScreen extends Component{
 
     constructor(props){
         super(props);
-
     }
 
     
@@ -22,6 +22,7 @@ class EditDetailsScreen extends Component{
                 <stack.Screen name="EditName" component={EditNameScreen} />
                 <stack.Screen name="EditEmail" component={EditEmailScreen} />
                 <stack.Screen name="EditPassword" component={EditPasswordScreen} />
+                <stack.Screen name="EditPhoto" component={EditPhotoScreen} />
             </stack.Navigator>
         )
     }

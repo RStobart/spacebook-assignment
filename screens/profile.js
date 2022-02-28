@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
 
@@ -11,6 +11,7 @@ class ProfileScreen extends Component{
         this.state = {
             user_info : {},
             user_posts: [],
+            user_photo: "",
             own_profile: false,
             logged_user_id: ""
         };
@@ -27,12 +28,10 @@ class ProfileScreen extends Component{
         this.setState({logged_user_id: ownId})
         if(ownId === this.props.route.params.userId){
             this.setState({own_profile: true});
-            this.getUserDetails(ownId);
-            this.getUserPosts(ownId);
+            this.loadDetailsAndPosts(ownId);
         }
         else{
-            this.getUserDetails(this.props.route.params.userId);
-            this.getUserPosts(this.props.route.params.userId);
+            this.loadDetailsAndPosts(this.props.route.params.userId);
         }
     }
     
@@ -84,8 +83,33 @@ class ProfileScreen extends Component{
         })
     }
 
-    loadOwnDetailsAndPosts = async () => {
-        let userId = await AsyncStorage.getItem("@user_id");
+    getUserPhoto = async (userId) => {
+        let userToken = await AsyncStorage.getItem("@session_token");
+        return fetch("http://localhost:3333/api/1.0.0/user/" + userId + "/photo", {
+            method: 'GET',
+            headers: {
+                'X-Authorization': userToken
+            }
+        })
+        .then((response) => {
+            if(response.status === 200){
+                return response.blob();
+            }else if(response.status === 401){
+                //Unauthorised
+            }else if(response.status === 404){
+                //User not found, fucked
+            }else{
+                //500
+            }
+        })
+        .then(async (responseBlob) => {
+            let photoData = URL.createObjectURL(responseBlob);
+            this.setState({user_photo: photoData});
+        })
+    }
+
+    loadDetailsAndPosts = async (userId) => {
+        this.getUserPhoto(userId);
         this.getUserDetails(userId);
         this.getUserPosts(userId);
     }
@@ -104,8 +128,9 @@ class ProfileScreen extends Component{
 
         return(
             <View>
+                <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
                 <Text>Name: {this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
-                <Text>Friends: </Text>
+                <Text>{this.state.user_info.friend_count} friends</Text>
                 <Text>Posts: </Text>
                 {postList}
             </View>

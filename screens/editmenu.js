@@ -13,6 +13,7 @@ class EditMenuScreen extends Component {
                 <Button onPress={() => this.props.navigation.navigate("EditName")} title="Edit name"/>
                 <Button onPress={() => this.props.navigation.navigate("EditEmail")} title="Edit email"/>
                 <Button onPress={() => this.props.navigation.navigate("EditPassword")} title="Edit password"/>
+                <Button onPress={() => this.props.navigation.navigate("EditPhoto")} title="Edit photo"/>
             </View>
         )
     }

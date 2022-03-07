@@ -4,22 +4,23 @@ import { View } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 class LoginScreen extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
-            email : "",
-            password : ""
+            email: "",
+            password: ""
         }
-        
+
     }
-    
+
     checkForLogin = async () => {
         let potentialToken = await AsyncStorage.getItem("@session_token");
         let potentialId = await AsyncStorage.getItem("@user_id");
-        if(potentialToken != null && potentialId != null){
-            this.props.navigation.navigate("butts", {userId: potentialId});
+        if (potentialToken != null && potentialId != null) {
+            this.props.navigation.navigate("butts", { userId: potentialId });
         }
     }
 
@@ -31,31 +32,31 @@ class LoginScreen extends Component {
             },
             body: JSON.stringify(this.state)
         })
-        .then((response) => {
-            if(response.status === 200){
-                return response.json()
-            }else if(response.status === 400){
-                //Invalid email or password
-            }else{
-                //500
-            }
-        })
-        .then(async (responseJson) => {
-            await AsyncStorage.setItem('@user_id', responseJson.id)
-            await AsyncStorage.setItem('@session_token', responseJson.token);
-            this.props.navigation.navigate("butts", {userId: responseJson.id});
-        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                } else if (response.status === 400) {
+                    //Invalid email or password
+                } else {
+                    //500
+                }
+            })
+            .then(async (responseJson) => {
+                await AsyncStorage.setItem('@user_id', responseJson.id)
+                await AsyncStorage.setItem('@session_token', responseJson.token);
+                this.props.navigation.navigate("butts", { userId: responseJson.id });
+            })
     }
 
-    render(){
+    render() {
         this.checkForLogin();
 
-        return(
+        return (
             <View>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} secureTextEntry />
+                <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.email} onChangeText={(email) => this.setState({ email })} />
+                <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.password} onChangeText={(password) => this.setState({ password })} secureTextEntry />
                 <Button onPress={() => this.login()} title="Login" />
-                <Button onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?"/>
+                <Button onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?" />
             </View>
         )
     }

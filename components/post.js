@@ -3,8 +3,8 @@ import { View, Text } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-class Post extends Component{
-    constructor(props){
+class Post extends Component {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -23,22 +23,22 @@ class Post extends Component{
                 'X-Authorization': userToken
             }
         })
-        .then((response) => {
-            if(response.status === 200){
-                return this.setState({
-                    liked: "unlike"
-                });
-            }else if(response.status === 401){
-                //Unauthorised
-            }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
-            }
-        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return this.setState({
+                        liked: "unlike"
+                    });
+                } else if (response.status === 401) {
+                    //Unauthorised
+                } else if (response.status === 404) {
+                    //User not found, fucked
+                } else {
+                    //500
+                }
+            })
     }
 
-    
+
     unlike = async () => {
         let postId = this.props.post.post_id;
         let userId = this.props.post.author.user_id;
@@ -49,19 +49,19 @@ class Post extends Component{
                 'X-Authorization': userToken
             }
         })
-        .then((response) => {
-            if(response.status === 200){
-                return this.setState({
-                    liked: "like"
-                });
-            }else if(response.status === 401){
-                //Unauthorised
-            }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
-            }
-        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return this.setState({
+                        liked: "like"
+                    });
+                } else if (response.status === 401) {
+                    //Unauthorised
+                } else if (response.status === 404) {
+                    //User not found, fucked
+                } else {
+                    //500
+                }
+            })
     }
 
     delete = async () => {
@@ -74,40 +74,39 @@ class Post extends Component{
                 'X-Authorization': userToken
             }
         })
-        .then((response) => {
-            if(response.status === 200){
-                //YAY,DELETED
-            }else if(response.status === 401){
-                //Unauthorised
-            }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
-            }
-        })
+            .then((response) => {
+                if (response.status === 200) {
+                    //YAY,DELETED
+                } else if (response.status === 401) {
+                    //Unauthorised
+                } else if (response.status === 404) {
+                    //User not found, fucked
+                } else {
+                    //500
+                }
+            })
     }
 
-    render(){
-        //NEED TO ADAPT EDIT POST INTO ITS OWN MINI STACK NAVIGATOR
-        if(this.props.logged_user_id == this.props.post.author.user_id){
-            return(
+    render() {
+        if (this.props.logged_user_id == this.props.post.author.user_id) {
+            return (
                 <View>
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
-                    <Button onPress={() => this.like()} title={this.state.liked}/>
-                    <Button onPress={() => this.props.navigation.navigate("EditPost", {post: this.props.post})} title="Edit post"/> 
-                    <Button onPress={() => this.delete()} title="Delete post"/>
+                    <Button onPress={() => this.like()} title={this.state.liked} />
+                    <Button onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} title="Edit post" />
+                    <Button onPress={() => this.delete()} title="Delete post" />
                 </View>
             )
         }
-        else{
-            return(
+        else {
+            return (
                 <View>
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
-                    <Button onPress={() => this.like()} title={this.state.liked}/>
+                    <Button onPress={() => this.like()} title={this.state.liked} />
                 </View>
             )
         }

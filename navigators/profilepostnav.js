@@ -1,22 +1,22 @@
 import { Component } from "react/cjs/react.production.min";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ProfileScreen from "../screens/profile";
-import EditPostScreen from "../screens/editpost";
+import ProfileScreen from "../screens/profile.js";
+import EditPostScreen from "../screens/editpost.js";
 
-class ProfileNavScreen extends Component{
+class ProfileNavScreen extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
     }
 
-    
-    render(){
+
+    render() {
         const stack = createNativeStackNavigator();
 
-        return(
+        return (
             <stack.Navigator initialRouteName="Profile">
-                <stack.Screen name="Profile" component={ProfileScreen} initialParams={{userId: this.props.route.params.userId}} />
+                <stack.Screen name="Profile" component={ProfileScreen} initialParams={{ userId: this.props.route.params.userId }} />
                 <stack.Screen name="EditPost" component={EditPostScreen} />
             </stack.Navigator>
         )

@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Friend from "../components/friend";
+import Friend from "../components/friend.js";
 
 class FriendsScreen extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -22,24 +22,24 @@ class FriendsScreen extends Component {
                 'X-Authorization': userToken
             },
         })
-        .then((response) => {
-            if(response.status === 200){
-                return response.json()
-            }else if(response.status === 400){
-                //Invalid search
-            }else if(response.status === 401){
-                //Unauthorized
-            }else{
-                //500
-            }
-        })
-        .then(async (friends) => {
-            this.setState({friends});
-        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.json()
+                } else if (response.status === 400) {
+                    //Invalid search
+                } else if (response.status === 401) {
+                    //Unauthorized
+                } else {
+                    //500
+                }
+            })
+            .then(async (friends) => {
+                this.setState({ friends });
+            })
     }
-    
-    render(){
-        let friendResults =[];
+
+    render() {
+        let friendResults = [];
         let keyNum = 0;
 
         this.state.friends.forEach((thisFriend) => {
@@ -49,15 +49,15 @@ class FriendsScreen extends Component {
             keyNum++;
         });
 
-        if(friendResults.length === 0){
-            return(
+        if (friendResults.length === 0) {
+            return (
                 <View>
                     <Text>You have none friends m8 :'(</Text>
                 </View>
             )
         }
 
-        return(
+        return (
             <View>
                 {friendResults}
             </View>

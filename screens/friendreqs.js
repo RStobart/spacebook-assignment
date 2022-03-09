@@ -2,6 +2,7 @@ import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FriendRequest from '../components/friendrequest.js';
+import {Restart} from 'fiction-expo-restart';
 
 class FriendReqScreen extends Component{
 
@@ -22,6 +23,9 @@ class FriendReqScreen extends Component{
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){

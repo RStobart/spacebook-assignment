@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TextInput } from "react-native-gesture-handler";
+import {Restart} from 'fiction-expo-restart';
 
 class EditPostScreen extends Component {
     constructor(props){
@@ -24,6 +25,9 @@ class EditPostScreen extends Component {
                 'X-Authorization': userToken
             },
             body: JSON.stringify(this.state)
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){

@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
+import {Restart} from 'fiction-expo-restart';
 
 class EditPhotoScreen extends Component{
 
@@ -26,6 +27,9 @@ class EditPhotoScreen extends Component{
                 'X-Authorization': userToken
             },
             body: photoBlob//data is a bit poo, find out why
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){

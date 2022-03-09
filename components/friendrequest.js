@@ -1,8 +1,9 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text, Image } from "react-native";
+import { View } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Friend from "./friend";
+import {Restart} from 'fiction-expo-restart';
 
 class FriendRequest extends Component{
     constructor(props){
@@ -21,6 +22,9 @@ class FriendRequest extends Component{
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){
@@ -56,31 +60,6 @@ class FriendRequest extends Component{
             }else{
                 //500
             }
-        })
-    }
-
-    getUserPhoto = async (userId) => {
-        let userToken = await AsyncStorage.getItem("@session_token");
-        return fetch("http://localhost:3333/api/1.0.0/user/" + this.props.user.user_id + "/photo", {
-            method: 'GET',
-            headers: {
-                'X-Authorization': userToken
-            }
-        })
-        .then((response) => {
-            if(response.status === 200){
-                return response.blob();
-            }else if(response.status === 401){
-                //Unauthorised
-            }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
-            }
-        })
-        .then(async (responseBlob) => {
-            let photoData = URL.createObjectURL(responseBlob);
-            this.setState({user_photo: photoData});
         })
     }
 

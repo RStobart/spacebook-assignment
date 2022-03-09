@@ -1,7 +1,8 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text } from "react-native";
+import { View, Text, Alert } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Restart} from 'fiction-expo-restart';
 
 class Post extends Component {
     constructor(props) {
@@ -22,6 +23,9 @@ class Post extends Component {
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
             .then((response) => {
                 if (response.status === 200) {
@@ -48,6 +52,9 @@ class Post extends Component {
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
             .then((response) => {
                 if (response.status === 200) {
@@ -73,6 +80,9 @@ class Post extends Component {
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
             .then((response) => {
                 if (response.status === 200) {

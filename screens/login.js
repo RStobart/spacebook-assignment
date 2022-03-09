@@ -3,7 +3,7 @@ import { Button } from "react-native-web";
 import { View } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import {Restart} from 'fiction-expo-restart';
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -31,6 +31,9 @@ class LoginScreen extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state)
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
             .then((response) => {
                 if (response.status === 200) {

@@ -2,6 +2,7 @@ import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Restart} from 'fiction-expo-restart';
 
 class SearchResult extends Component{
     constructor(props){
@@ -19,6 +20,9 @@ class SearchResult extends Component{
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){

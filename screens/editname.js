@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Restart} from 'fiction-expo-restart';
 
 class EditNameScreen extends Component{
 
@@ -25,6 +26,9 @@ class EditNameScreen extends Component{
                 'X-Authorization': userToken
             },
             body: JSON.stringify(this.state)
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){

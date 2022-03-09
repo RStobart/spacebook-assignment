@@ -1,7 +1,7 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text, Image } from "react-native";
-import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Restart} from 'fiction-expo-restart';
 
 class Friend extends Component{
     constructor(props){
@@ -12,13 +12,16 @@ class Friend extends Component{
         }
     }
 
-    getUserPhoto = async (userId) => {
+    getUserPhoto = async () => {
         let userToken = await AsyncStorage.getItem("@session_token");
         return fetch("http://localhost:3333/api/1.0.0/user/" + this.props.user.user_id + "/photo", {
             method: 'GET',
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){

@@ -1,7 +1,8 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
+import {Restart} from 'fiction-expo-restart';
 
 class ProfileScreen extends Component{
 
@@ -42,12 +43,21 @@ class ProfileScreen extends Component{
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 401){
-                //Unauthorised
+                Alert.alert(
+                    "Unable to log in",
+                    "You were unable to be logged in automatically, please try logging in again",
+                    [
+                        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
+                    ]
+                );
             }else if(response.status === 404){
                 //User not found, fucked
             }else{
@@ -66,12 +76,21 @@ class ProfileScreen extends Component{
             headers: {
                 'X-Authorization': userToken
             }
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
         .then((response) => {
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 401){
-                //Unauthorised
+                Alert.alert(
+                    "Unable to log in",
+                    "You were unable to be logged in automatically, please try logging in again",
+                    [
+                        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
+                    ]
+                );
             }else if(response.status === 404){
                 //User not found, fucked
             }else{
@@ -90,12 +109,21 @@ class ProfileScreen extends Component{
             headers: {
                 'X-Authorization': userToken
             }
-        })
-        .then((response) => {
+        }).catch((err) => {
+            console.log(err);
+            this.props.navigation.navigate("Login")
+        }).then((response) => {
             if(response.status === 200){
                 return response.blob();
             }else if(response.status === 401){
-                //Unauthorised
+                this.removeLoginDetails();
+                Alert.alert(
+                    "Unable to log in",
+                    "You were unable to be logged in automatically, please try logging in again",
+                    [
+                        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
+                    ]
+                );
             }else if(response.status === 404){
                 //User not found, fucked
             }else{
@@ -106,6 +134,11 @@ class ProfileScreen extends Component{
             let photoData = URL.createObjectURL(responseBlob);
             this.setState({user_photo: photoData});
         })
+    }
+
+    removeLoginDetails = async () => {
+        await AsyncStorage.removeItem("@user_id");
+        await AsyncStorage.removeItem("@session_token");
     }
 
     loadDetailsAndPosts = async (userId) => {

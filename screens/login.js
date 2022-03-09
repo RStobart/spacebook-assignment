@@ -31,9 +31,6 @@ class LoginScreen extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(this.state)
-        }).catch((err) => {
-            console.log(err);
-            Restart();
         })
             .then((response) => {
                 if (response.status === 200) {

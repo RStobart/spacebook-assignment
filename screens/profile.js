@@ -45,7 +45,7 @@ class ProfileScreen extends Component{
             }
         }).catch((err) => {
             console.log(err);
-            Restart();
+            this.props.navigation.navigate("Login")
         })
         .then((response) => {
             if(response.status === 200){
@@ -111,6 +111,7 @@ class ProfileScreen extends Component{
             }
         }).catch((err) => {
             console.log(err);
+            this.removeLoginDetails();
             this.props.navigation.navigate("Login")
         }).then((response) => {
             if(response.status === 200){
@@ -142,9 +143,9 @@ class ProfileScreen extends Component{
     }
 
     loadDetailsAndPosts = async (userId) => {
-        this.getUserPhoto(userId);
         this.getUserDetails(userId);
         this.getUserPosts(userId);
+        this.getUserPhoto(userId);
     }
 
     render(){

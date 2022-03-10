@@ -39,18 +39,18 @@ class CreatePostScreen extends Component {
                     this.removeLoginDetails();
                     this.setState({
                         showAlert: true,
-                        text: "Login session lost, please log in again"
+                        alertText: "Login session lost, please log in again"
                     });
                     Restart();
                 } else if (response.status === 404) {
                     this.setState({
                         showAlert: true,
-                        text: "User not found, cannot create post"
+                        alertText: "User not found, cannot create post"
                      });
                 } else {//500
                     this.setState({
                         showAlert: true,
-                        text: "Something went wrong, try again later"
+                        alertText: "Something went wrong, try again later"
                      });
                 }
             })

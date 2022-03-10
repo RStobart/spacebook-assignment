@@ -36,23 +36,30 @@ class Post extends Component {
                     this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
                 } else if (response.status === 403) {
-                    this.setState({
-                        showAlert: true,
-                        text: "You have already liked this post"
-                    });
+                    if (this.props.logged_user_id == this.props.post.author.user_id){
+                        this.setState({
+                            showAlert: true,
+                            alertText: "You can't like or unlike your own posts"
+                        });
+                    }else{
+                        this.setState({
+                            showAlert: true,
+                            alertText: "You have already liked this post"
+                        });
+                    }
                 } else if (response.status === 404) {
                     this.setState({
                         showAlert: true,
-                        text: "Post no longer exists so you can't like it"
+                        alertText: "Post no longer exists so you can't like it"
                      });
                 } else {//500
                     this.setState({
                         showAlert: true,
-                        text: "Something went wrong, try again later"
+                        alertText: "Something went wrong, try again later"
                      });
                 }
             })
@@ -78,23 +85,30 @@ class Post extends Component {
                     this.removeLoginDetails();
                     this.setState({
                         showAlert: true,
-                        text: "Login session lost, please log in again"
+                        alertText: "Login session lost, please log in again"
                     });
                     Restart();
                 } else if (response.status === 403) {
-                    this.setState({
-                        showAlert: true,
-                        text: "You haven't liked this post"
-                    });
+                    if (this.props.logged_user_id == this.props.post.author.user_id){
+                        this.setState({
+                            showAlert: true,
+                            alertText: "You can't like or unlike your own posts"
+                        });
+                    }else{
+                        this.setState({
+                            showAlert: true,
+                            alertText: "You have already liked this post"
+                        });
+                    }
                 } else if (response.status === 404) {
                     this.setState({
                         showAlert: true,
-                        text: "Post no longer exists so you can't unlike it"
+                        alertText: "Post no longer exists so you can't unlike it"
                      });
                 } else {//500
                     this.setState({
                         showAlert: true,
-                        text: "Something went wrong, try again later"
+                        alertText: "Something went wrong, try again later"
                      });
                 }
             })
@@ -117,29 +131,29 @@ class Post extends Component {
                 if (response.status === 200) {
                     this.setState({
                         showAlert: true,
-                        text: "Deleted post!"
+                        alertText: "Deleted post!"
                     });
                 } else if (response.status === 401) {
                     this.removeLoginDetails();
                     this.setState({
                         showAlert: true,
-                        text: "Login session lost, please log in again"
+                        alertText: "Login session lost, please log in again"
                     });
                     Restart();
                 } else if (response.status === 403) {
                     this.setState({
                         showAlert: true,
-                        text: "You cannot delete other users posts"
+                        alertText: "You cannot delete other users posts"
                     });
                 } else if (response.status === 404) {
                     this.setState({
                         showAlert: true,
-                        text: "Unable to delete, post not found"
+                        alertText: "Unable to delete, post not found"
                     });
                 } else {//500
                     this.setState({
                         showAlert: true,
-                        text: "Something went wrong, try again later"
+                        alertText: "Something went wrong, try again later"
                      });
                 }
             })
@@ -154,6 +168,7 @@ class Post extends Component {
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
                     <Button onPress={() => this.like()} title="Like" />
+                    <Button onPress={() => this.unlike()} title="Unlike" />
                     <Button onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} title="Edit post" />
                     <Button onPress={() => this.delete()} title="Delete post" />
 

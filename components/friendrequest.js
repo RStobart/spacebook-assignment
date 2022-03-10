@@ -33,7 +33,7 @@ class FriendRequest extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    text: this.props.user.user_givenname + " " + this.props.user.user_familyname + " is now your friend"
+                    alertText: this.props.user.user_givenname + " " + this.props.user.user_familyname + " is now your friend"
                 });
                 return this.setState({
                     hide: true
@@ -42,18 +42,18 @@ class FriendRequest extends Component{
                 this.removeLoginDetails();
                     this.setState({
                         showAlert: true,
-                        text: "Login session lost, please log in again"
+                        alertText: "Login session lost, please log in again"
                     });
                     Restart();
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "Request not found, cannot add as friend"
+                    alertText: "Request not found, cannot add as friend"
                 });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })
@@ -71,7 +71,7 @@ class FriendRequest extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    text: "Freind request from " + this.props.user.user_givenname + " " + this.props.user.user_familyname + " rejected"
+                    alertText: "Freind request from " + this.props.user.user_givenname + " " + this.props.user.user_familyname + " rejected"
                 });
                 return this.setState({
                     hide: true
@@ -80,18 +80,18 @@ class FriendRequest extends Component{
                 this.removeLoginDetails();
                     this.setState({
                         showAlert: true,
-                        text: "Login session lost, please log in again"
+                        alertText: "Login session lost, please log in again"
                     });
                     Restart();
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "Request not found, cannot reject as friend"
+                    alertText: "Request not found, cannot reject as friend"
                 });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

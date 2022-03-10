@@ -31,29 +31,29 @@ class SearchResult extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    text: "Friend request sent!"
+                    alertText: "Friend request sent!"
                  });
             }else if(response.status === 401){
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 403){
                 this.setState({
                     showAlert: true,
-                    text: "This user is already your friend"
+                    alertText: "This user is already your friend"
                 });
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "User no longer exists so you can't add them as a friend"
+                    alertText: "User no longer exists so you can't add them as a friend"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

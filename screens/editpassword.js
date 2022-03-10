@@ -36,34 +36,34 @@ class EditPasswordScreen extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    text: "Password updated!"
+                    alertText: "Password updated!"
                 });
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Unable to update password due to bad data"
+                    alertText: "Unable to update password due to bad data"
                 });
             }else if(response.status === 401){
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 403){
                 this.setState({
                     showAlert: true,
-                    text: "You cannot update another users password"
+                    alertText: "You cannot update another users password"
                  });
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "User missing, unable to update password"
+                    alertText: "User missing, unable to update password"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

@@ -36,34 +36,34 @@ class EditEmailScreen extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    text: "Email updated!"
+                    alertText: "Email updated!"
                 });
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Unable to update email due to bad data"
+                    alertText: "Unable to update email due to bad data"
                 });
             }else if(response.status === 401){
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 403){
                 this.setState({
                     showAlert: true,
-                    text: "You cannot update another users email"
+                    alertText: "You cannot update another users email"
                  });
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "User missing, unable to update email"
+                    alertText: "User missing, unable to update email"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

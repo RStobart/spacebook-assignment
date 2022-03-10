@@ -36,18 +36,18 @@ class SearchScreen extends Component {
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Sorry, that search didn't work, please try another"
+                    alertText: "Sorry, that search didn't work, please try another"
                 });
             }else if(response.status === 401){
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

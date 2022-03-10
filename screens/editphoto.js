@@ -40,24 +40,24 @@ class EditPhotoScreen extends Component{
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Unable to update photo due to bad photo data"
+                    alertText: "Unable to update photo due to bad photo data"
                 });
             }else if(response.status === 401){
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "User missing, unable to update photo"
+                    alertText: "User missing, unable to update photo"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

@@ -33,18 +33,18 @@ class Friend extends Component{
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "Photo not found, user does not exist"
+                    alertText: "Photo not found, user does not exist"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

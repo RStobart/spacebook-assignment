@@ -42,12 +42,12 @@ class LoginScreen extends Component {
                         email: "",
                         password: "",
                         showAlert: true,
-                        text: "Invalid email or password"
+                        alertText: "Invalid email or password"
                     });
                 } else {//500
                     this.setState({
                         showAlert: true,
-                        text: "Something went wrong, try again later"
+                        alertText: "Something went wrong, try again later"
                      });
                 }
             })

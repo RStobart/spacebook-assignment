@@ -38,29 +38,29 @@ class EditPostScreen extends Component {
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Unable to update post due to bad data"
+                    alertText: "Unable to update post due to bad data"
                 });
             }else if(response.status === 401){
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 403){
                 this.setState({
                     showAlert: true,
-                    text: "You cannot update another users posts"
+                    alertText: "You cannot update another users posts"
                  });
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "Post missing, unable to update"
+                    alertText: "Post missing, unable to update"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

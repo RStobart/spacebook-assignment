@@ -35,13 +35,13 @@ class SignupScreen extends Component {
             if(response.status === 201){
                 this.setState({
                     showAlert: true,
-                    text: "Account successfully created"
+                    alertText: "Account successfully created"
                  });
                 return response.json()
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Unable to create user due to bad data, please try again",
+                    alertText: "Unable to create user due to bad data, please try again",
                     first_name: "",
                     last_name: "",
                     email : "",
@@ -50,7 +50,7 @@ class SignupScreen extends Component {
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

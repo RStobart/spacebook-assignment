@@ -35,19 +35,19 @@ class FriendsScreen extends Component {
                 }else if(response.status === 400){
                     this.setState({
                         showAlert: true,
-                        text: "Sorry, couldn't retrieve friend list"
+                        alertText: "Sorry, couldn't retrieve friend list"
                     });
                 }else if(response.status === 401){
                     this.removeLoginDetails();
                     this.setState({
                         showAlert: true,
-                        text: "Login session lost, please log in again"
+                        alertText: "Login session lost, please log in again"
                     });
                     Restart();
                 }else{//500
                     this.setState({
                         showAlert: true,
-                        text: "Something went wrong, try again later"
+                        alertText: "Something went wrong, try again later"
                      });
                 }
             })

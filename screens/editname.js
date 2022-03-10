@@ -37,34 +37,34 @@ class EditNameScreen extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    text: "Name updated!"
+                    alertText: "Name updated!"
                 });
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
-                    text: "Unable to update name due to bad data"
+                    alertText: "Unable to update name due to bad data"
                 });
             }else if(response.status === 401){
                 this.removeLoginDetails();
                 this.setState({
                     showAlert: true,
-                    text: "Login session lost, please log in again"
+                    alertText: "Login session lost, please log in again"
                 });
                 Restart();
             }else if(response.status === 403){
                 this.setState({
                     showAlert: true,
-                    text: "You cannot update another users name"
+                    alertText: "You cannot update another users name"
                  });
             }else if(response.status === 404){
                 this.setState({
                     showAlert: true,
-                    text: "User missing, unable to update name"
+                    alertText: "User missing, unable to update name"
                  });
             }else{//500
                 this.setState({
                     showAlert: true,
-                    text: "Something went wrong, try again later"
+                    alertText: "Something went wrong, try again later"
                  });
             }
         })

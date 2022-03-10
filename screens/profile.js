@@ -2,7 +2,6 @@ import { Component } from "react/cjs/react.production.min";
 import { View, Text, Image, Alert } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
-import {Restart} from 'fiction-expo-restart';
 
 class ProfileScreen extends Component{
 
@@ -45,6 +44,7 @@ class ProfileScreen extends Component{
             }
         }).catch((err) => {
             console.log(err);
+            this.removeLoginDetails();
             this.props.navigation.navigate("Login")
         })
         .then((response) => {
@@ -78,7 +78,8 @@ class ProfileScreen extends Component{
             }
         }).catch((err) => {
             console.log(err);
-            Restart();
+            this.removeLoginDetails();
+            this.props.navigation.navigate("Login")
         })
         .then((response) => {
             if(response.status === 200){

@@ -34,7 +34,7 @@ class CreatePostScreen extends Component {
         })
             .then((response) => {
                 if (response.status === 201) {
-                    //Hooray, updated
+                    //Posted successfully
                 } else if (response.status === 401) {
                     this.removeLoginDetails();
                     this.setState({
@@ -60,7 +60,7 @@ class CreatePostScreen extends Component {
         let userId = await AsyncStorage.getItem("@user_id");
         let userDrafts = await AsyncStorage.getItem("@drafts" + userId);
         let tempDrafts = [];
-        if (userDrafts == "\"[]\"") {
+        if (userDrafts == null || userDrafts == "\"[]\"") {
             console.log("nullset");
             tempDrafts = [];
         }
@@ -69,7 +69,13 @@ class CreatePostScreen extends Component {
         }
         console.log(tempDrafts);
         tempDrafts.push({ "draftId": (tempDrafts.length + 1), "text": this.state.text });
-        await AsyncStorage.setItem("@drafts" + userId, JSON.stringify(tempDrafts));
+        await AsyncStorage.setItem("@drafts" + userId, JSON.stringify(tempDrafts))
+        .then(() => {
+            this.setState({
+                showAlert: true,
+                alertText: "Saved draft"
+             });
+        });
     }
 
     render() {

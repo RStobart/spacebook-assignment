@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Draft from '../components/draft.js';
 
@@ -28,18 +28,8 @@ class DraftsScreen extends Component {
 
         let draftList = [];
         let keyNum = 0;
-
-        console.log(this.state.drafts)
-
-        this.state.drafts.forEach((thisDraft) => {
-            console.log(thisDraft);
-            draftList.push(
-                <Draft navigation={this.props.navigation} key={keyNum} draft={thisDraft} />
-            );
-            keyNum++;
-        });
-
-        if (draftList.length === 0) {
+        
+        if (this.state.drafts === null || this.state.drafts.length === 0 ) {
             return (
                 <View>
                     <Text>You do not have any saved drafts at the moment</Text>
@@ -47,10 +37,17 @@ class DraftsScreen extends Component {
             )
         }
         else {
+            this.state.drafts.forEach((thisDraft) => {
+                console.log(thisDraft);
+                draftList.push(
+                    <Draft navigation={this.props.navigation} key={keyNum} draft={thisDraft} />
+                );
+                keyNum++;
+            });
             return (
-                <View>
+                <ScrollView>
                     {draftList}
-                </View>
+                </ScrollView>
             )
         }
     }

@@ -58,7 +58,7 @@ class Post extends Component {
             })
     }
 
-    like = async () => {
+    unlike = async () => {
         let postId = this.props.post.post_id;
         let userId = this.props.post.author.user_id;
         let userToken = await AsyncStorage.getItem("@session_token");
@@ -178,6 +178,7 @@ class Post extends Component {
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
                     <Button onPress={() => this.like()} title="Like" />
+                    <Button onPress={() => this.unlike()} title="Unlike" />
 
                     <AwesomeAlert
                         show={this.state.showAlert}

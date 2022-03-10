@@ -4,6 +4,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class EditEmailScreen extends Component{
 
@@ -11,7 +12,9 @@ class EditEmailScreen extends Component{
         super(props);
 
         this.state = {
-            email : ""
+            email : "",
+            showAlert: false,
+            alertText: ""
         };
     }
     
@@ -31,17 +34,37 @@ class EditEmailScreen extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                //Hooray, updated
+                this.setState({
+                    showAlert: true,
+                    text: "Email updated!"
+                });
             }else if(response.status === 400){
-                //Bad req
+                this.setState({
+                    showAlert: true,
+                    text: "Unable to update email due to bad data"
+                });
             }else if(response.status === 401){
-                //Unauthorised
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 403){
-                //Forbidden, not you
+                this.setState({
+                    showAlert: true,
+                    text: "You cannot update another users email"
+                 });
             }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "User missing, unable to update email"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
     }
@@ -52,6 +75,18 @@ class EditEmailScreen extends Component{
             <View>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
                 <Button onPress={() => this.updateEmail()} />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

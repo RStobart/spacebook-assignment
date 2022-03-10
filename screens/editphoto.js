@@ -4,6 +4,7 @@ import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class EditPhotoScreen extends Component{
 
@@ -11,7 +12,9 @@ class EditPhotoScreen extends Component{
         super(props);
 
         this.state = {
-            photo : {}
+            photo : {},
+            showAlert: false,
+            alertText: ""
         };
     }
     
@@ -35,15 +38,27 @@ class EditPhotoScreen extends Component{
             if(response.status === 200){
                 //Hooray, updated
             }else if(response.status === 400){
-                //Bad req
+                this.setState({
+                    showAlert: true,
+                    text: "Unable to update photo due to bad photo data"
+                });
             }else if(response.status === 401){
-                //Unauthorised
-            }else if(response.status === 403){
-                //Forbidden, not you
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "User missing, unable to update photo"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
     }
@@ -64,6 +79,18 @@ class EditPhotoScreen extends Component{
         return(
             <View>
                 <Button onPress={() => this.choosePhoto()} title="Choose new profile photo" />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

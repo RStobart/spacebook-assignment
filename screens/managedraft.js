@@ -2,13 +2,16 @@ import { Component } from "react/cjs/react.production.min";
 import { View, Text, TextInput } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class ManageDraftScreen extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            text: ""
+            text: "",
+            showAlert: false,
+            alertText: ""
         };
     }
 
@@ -49,20 +52,36 @@ class ManageDraftScreen extends Component {
                 'X-Authorization': userToken
             },
             body: JSON.stringify(this.state)
+        }).catch((err) => {
+            console.log(err);
+            Restart();
         })
-            .then((response) => {
-                if (response.status === 201) {
-                    //Hooray, created
-                } else if (response.status === 400) {
-                    //Bad req
-                } else if (response.status === 401) {
-                    //Unauthorised
-                } else if (response.status === 404) {
-                    //User not found, fucked
-                } else {
-                    //500
-                }
-            })
+        .then((response) => {
+            if (response.status === 201) {
+                this.setState({
+                    showAlert: true,
+                    text: "Draft successfully posted"
+                });
+                this.deleteDraft();
+            } else if (response.status === 401) {
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
+            } else if (response.status === 404) {
+                this.setState({
+                    showAlert: true,
+                    text: "User not found, cannot create post"
+                 });
+            } else {//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
+            }
+        })
     }
 
     render() {
@@ -72,6 +91,18 @@ class ManageDraftScreen extends Component {
                 <Button title="Post" onPress={() => this.post()} />
                 <Button title="Update draft" onPress={() => this.updateDraft()} />
                 <Button title="Delete draft" onPress={() => this.deleteDraft()} />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

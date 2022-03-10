@@ -4,6 +4,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class EditNameScreen extends Component{
 
@@ -12,7 +13,9 @@ class EditNameScreen extends Component{
 
         this.state = {
             first_name : "",
-            last_name: ""
+            last_name: "",
+            showAlert: false,
+            alertText: ""
         };
     }
     
@@ -32,17 +35,37 @@ class EditNameScreen extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                //Hooray, updated
+                this.setState({
+                    showAlert: true,
+                    text: "Name updated!"
+                });
             }else if(response.status === 400){
-                //Bad req
+                this.setState({
+                    showAlert: true,
+                    text: "Unable to update name due to bad data"
+                });
             }else if(response.status === 401){
-                //Unauthorised
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 403){
-                //Forbidden, not you
+                this.setState({
+                    showAlert: true,
+                    text: "You cannot update another users name"
+                 });
             }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "User missing, unable to update name"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
     }
@@ -54,6 +77,18 @@ class EditNameScreen extends Component{
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
                 <Button onPress={() => this.updateName()} />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

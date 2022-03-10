@@ -2,13 +2,16 @@ import { Component } from "react/cjs/react.production.min";
 import { View, Text, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class Friend extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            user_photo: ""
+            user_photo: "",
+            showAlert: false,
+            alertText: ""
         }
     }
 
@@ -27,11 +30,22 @@ class Friend extends Component{
             if(response.status === 200){
                 return response.blob();
             }else if(response.status === 401){
-                //Unauthorised
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Photo not found, user does not exist"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (responseBlob) => {
@@ -45,6 +59,18 @@ class Friend extends Component{
             <View>
                 <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
                 <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

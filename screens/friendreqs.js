@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FriendRequest from '../components/friendrequest.js';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class FriendReqScreen extends Component{
 
@@ -10,7 +11,9 @@ class FriendReqScreen extends Component{
         super(props);
 
         this.state = {
-            potential_friends: []
+            potential_friends: [],
+            showAlert: false,
+            alertText: ""
         };
 
         this.getUserFriendRequests();
@@ -31,9 +34,17 @@ class FriendReqScreen extends Component{
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 401){
-                //Unauthorised
-            }else{
-                //500
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (potential_friends) => {
@@ -64,6 +75,18 @@ class FriendReqScreen extends Component{
             return(
                 <View>
                     {requestList}
+
+                    <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
                 </View>
             )
         }

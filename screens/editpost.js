@@ -4,13 +4,16 @@ import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TextInput } from "react-native-gesture-handler";
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class EditPostScreen extends Component {
     constructor(props){
         super(props);
         
         this.state = {
-            text: this.props.route.params.post.text
+            text: this.props.route.params.post.text,
+            showAlert: false,
+            alertText: ""
         }
     }
 
@@ -33,25 +36,54 @@ class EditPostScreen extends Component {
             if(response.status === 200){
                 this.props.navigation.goBack();
             }else if(response.status === 400){
-                //Bad request
+                this.setState({
+                    showAlert: true,
+                    text: "Unable to update post due to bad data"
+                });
             }else if(response.status === 401){
-                //Unauthorised
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 403){
-                //Not your post
+                this.setState({
+                    showAlert: true,
+                    text: "You cannot update another users posts"
+                 });
             }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Post missing, unable to update"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
     }
 
     render(){
-        return(//THIS IS GIVING 400 FOR SOME FUCKING REASON
+        return(
             <View>
                 <Text>Edit the post below</Text>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.text} onChangeText={(text) => this.setState({text})} />
                 <Button onPress={() => this.edit()} title="Done"/>
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

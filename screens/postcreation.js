@@ -4,6 +4,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class CreatePostScreen extends Component {
 
@@ -11,7 +12,9 @@ class CreatePostScreen extends Component {
         super(props);
 
         this.state = {
-            text: ""
+            text: "",
+            showAlert: false,
+            alertText: ""
         };
     }
 
@@ -32,14 +35,23 @@ class CreatePostScreen extends Component {
             .then((response) => {
                 if (response.status === 201) {
                     //Hooray, updated
-                } else if (response.status === 400) {
-                    //Bad req
                 } else if (response.status === 401) {
-                    //Unauthorised
+                    this.removeLoginDetails();
+                    this.setState({
+                        showAlert: true,
+                        text: "Login session lost, please log in again"
+                    });
+                    Restart();
                 } else if (response.status === 404) {
-                    //User not found, fucked
-                } else {
-                    //500
+                    this.setState({
+                        showAlert: true,
+                        text: "User not found, cannot create post"
+                     });
+                } else {//500
+                    this.setState({
+                        showAlert: true,
+                        text: "Something went wrong, try again later"
+                     });
                 }
             })
     }
@@ -68,6 +80,18 @@ class CreatePostScreen extends Component {
                 <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.text} onChangeText={(text) => this.setState({ text })} />
                 <Button title="Post" onPress={() => this.post()} />
                 <Button title="Save as draft" onPress={() => this.saveDraft()} />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

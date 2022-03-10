@@ -1,7 +1,9 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text, Image, Alert } from "react-native";
+import { View, Text, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
+import { Restart } from "fiction-expo-restart";
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class ProfileScreen extends Component{
 
@@ -13,7 +15,9 @@ class ProfileScreen extends Component{
             user_posts: [],
             user_photo: "",
             own_profile: false,
-            logged_user_id: ""
+            logged_user_id: "",
+            showAlert: false,
+            alertText: ""
         };
         
         this.props.navigation.setOptions({ headerShown: false });
@@ -51,17 +55,22 @@ class ProfileScreen extends Component{
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 401){
-                Alert.alert(
-                    "Unable to log in",
-                    "You were unable to be logged in automatically, please try logging in again",
-                    [
-                        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
-                    ]
-                );
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 404){
-                //User not found, fucked
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Details not found, user does not exist"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (user_info) => {
@@ -85,17 +94,27 @@ class ProfileScreen extends Component{
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 401){
-                Alert.alert(
-                    "Unable to log in",
-                    "You were unable to be logged in automatically, please try logging in again",
-                    [
-                        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
-                    ]
-                );
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
+            }else if(response.status === 403){
+                this.setState({
+                    showAlert: true,
+                    text: "You cannot view this users posts"
+                 });
             }else if(response.status === 404){
-                //User not found, fucked
+                this.setState({
+                    showAlert: true,
+                    text: "Posts not found, user does not exist"
+                 });
             }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (user_posts) => {
@@ -113,23 +132,27 @@ class ProfileScreen extends Component{
         }).catch((err) => {
             console.log(err);
             this.removeLoginDetails();
-            this.props.navigation.navigate("Login")
+            this.props.navigation.navigate("Login");
         }).then((response) => {
             if(response.status === 200){
                 return response.blob();
             }else if(response.status === 401){
                 this.removeLoginDetails();
-                Alert.alert(
-                    "Unable to log in",
-                    "You were unable to be logged in automatically, please try logging in again",
-                    [
-                        { text: "OK", onPress: () => this.props.navigation.navigate("Login") }
-                    ]
-                );
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 404){
-                //User not found, fucked
+                this.setState({
+                    showAlert: true,
+                    text: "Photo not found, user does not exist"
+                 });
             }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (responseBlob) => {
@@ -168,6 +191,18 @@ class ProfileScreen extends Component{
                 <Text>{this.state.user_info.friend_count} friends</Text>
                 <Text>Posts: </Text>
                 {postList}
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

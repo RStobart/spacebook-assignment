@@ -5,6 +5,7 @@ import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchResult from '../components/searchresult.js'
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class SearchScreen extends Component {
     constructor(props){
@@ -12,7 +13,9 @@ class SearchScreen extends Component {
 
         this.state = {
             search: "",
-            search_results: []
+            search_results: [],
+            showAlert: false,
+            alertText: ""
         }
     }
 
@@ -31,16 +34,25 @@ class SearchScreen extends Component {
             if(response.status === 200){
                 return response.json()
             }else if(response.status === 400){
-                //Invalid search
+                this.setState({
+                    showAlert: true,
+                    text: "Sorry, that search didn't work, please try another"
+                });
             }else if(response.status === 401){
-                //Unauthorized
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (search_results) => {
             this.setState({search_results});
-            this.render();
         })
     }
     
@@ -60,6 +72,18 @@ class SearchScreen extends Component {
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.search} onChangeText={(search) => this.setState({search})}/>
                 <Button onPress={() => this.searchForUsers()} title="Search"/>
                 {searchResults}
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

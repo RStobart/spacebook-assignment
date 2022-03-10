@@ -3,7 +3,7 @@ import { Button } from "react-native-web";
 import { View } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -11,7 +11,9 @@ class LoginScreen extends Component {
 
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            showAlert: false,
+            alertText: ""
         }
 
     }
@@ -30,19 +32,27 @@ class LoginScreen extends Component {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({email: this.state.email, password: this.state.password})
         })
             .then((response) => {
                 if (response.status === 200) {
                     return response.json()
                 } else if (response.status === 400) {
-                    //Invalid email or password
-                } else {
-                    //500
+                    this.setState({
+                        email: "",
+                        password: "",
+                        showAlert: true,
+                        text: "Invalid email or password"
+                    });
+                } else {//500
+                    this.setState({
+                        showAlert: true,
+                        text: "Something went wrong, try again later"
+                     });
                 }
             })
             .then(async (responseJson) => {
-                await AsyncStorage.setItem('@user_id', responseJson.id)
+                await AsyncStorage.setItem('@user_id', responseJson.id);
                 await AsyncStorage.setItem('@session_token', responseJson.token);
                 this.props.navigation.navigate("butts", { userId: responseJson.id });
             })
@@ -57,6 +67,18 @@ class LoginScreen extends Component {
                 <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.password} onChangeText={(password) => this.setState({ password })} secureTextEntry />
                 <Button onPress={() => this.login()} title="Login" />
                 <Button onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?" />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

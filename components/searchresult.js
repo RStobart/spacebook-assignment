@@ -3,13 +3,16 @@ import { View, Text } from "react-native";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class SearchResult extends Component{
     constructor(props){
         super(props);
 
         this.state = {
-            friend: ""
+            friend: "",
+            showAlert: false,
+            alertText: ""
         }
     }
 
@@ -26,15 +29,32 @@ class SearchResult extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                //Friend request sent
+                this.setState({
+                    showAlert: true,
+                    text: "Friend request sent!"
+                 });
             }else if(response.status === 401){
-                //Unauthorised
+                this.removeLoginDetails();
+                this.setState({
+                    showAlert: true,
+                    text: "Login session lost, please log in again"
+                });
+                Restart();
             }else if(response.status === 403){
-                //Already friend
+                this.setState({
+                    showAlert: true,
+                    text: "This user is already your friend"
+                });
             }else if(response.status === 404){
-                //User not found
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "User no longer exists so you can't add them as a friend"
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
     }
@@ -44,6 +64,18 @@ class SearchResult extends Component{
             <View>
                 <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
                 <Button onPress={() => this.sendFriendRequest()} title="Send friend request"/>
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

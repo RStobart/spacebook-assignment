@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 class SignupScreen extends Component {
     constructor(props){
@@ -13,7 +14,9 @@ class SignupScreen extends Component {
             first_name: "",
             last_name: "",
             email : "",
-            password : ""
+            password : "",
+            showAlert: false,
+            alertText: ""
         }
     }
 
@@ -30,11 +33,25 @@ class SignupScreen extends Component {
         })
         .then((response) => {
             if(response.status === 201){
+                this.setState({
+                    showAlert: true,
+                    text: "Account successfully created"
+                 });
                 return response.json()
             }else if(response.status === 400){
-                //Invalid email or password
-            }else{
-                //500
+                this.setState({
+                    showAlert: true,
+                    text: "Unable to create user due to bad data, please try again",
+                    first_name: "",
+                    last_name: "",
+                    email : "",
+                    password : ""
+                 });
+            }else{//500
+                this.setState({
+                    showAlert: true,
+                    text: "Something went wrong, try again later"
+                 });
             }
         })
         .then(async (responseJson) => {
@@ -51,6 +68,18 @@ class SignupScreen extends Component {
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} secureTextEntry />
                 <Button onPress={() => this.login()} title="Create account" />
+
+                <AwesomeAlert
+                        show={this.state.showAlert}
+                        message={this.state.alertText}
+                        showConfirmButton={true}
+                        confirmText="OK"
+                        onConfirmPressed={() => {
+                            this.setState({
+                                showAlert: false 
+                             });
+                        }}
+                    />
             </View>
         )
     }

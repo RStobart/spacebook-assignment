@@ -19,54 +19,61 @@ class EditPasswordScreen extends Component{
     }
     
     updatePassword = async () => {
-        let userToken = await AsyncStorage.getItem("@session_token");
-        let userId = await AsyncStorage.getItem("@user_id");
-        return fetch("http://localhost:3333/api/1.0.0/user/" + userId, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Authorization': userToken
-            },
-            body: JSON.stringify(this.state)
-        }).catch((err) => {
-            console.log(err);
-            Restart();
-        })
-        .then((response) => {
-            if(response.status === 200){
-                this.setState({
-                    showAlert: true,
-                    alertText: "Password updated!"
-                });
-            }else if(response.status === 400){
-                this.setState({
-                    showAlert: true,
-                    alertText: "Unable to update password due to bad data"
-                });
-            }else if(response.status === 401){
-                this.removeLoginDetails();
-                this.setState({
-                    showAlert: true,
-                    alertText: "Login session lost, please log in again"
-                });
+        if(this.state.password.length < 6){
+            this.setState({
+                showAlert: true,
+                alertText: "Password is too short"
+             });
+        } else{
+            let userToken = await AsyncStorage.getItem("@session_token");
+            let userId = await AsyncStorage.getItem("@user_id");
+            return fetch("http://localhost:3333/api/1.0.0/user/" + userId, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Authorization': userToken
+                },
+                body: JSON.stringify(this.state)
+            }).catch((err) => {
+                console.log(err);
                 Restart();
-            }else if(response.status === 403){
-                this.setState({
-                    showAlert: true,
-                    alertText: "You cannot update another users password"
-                 });
-            }else if(response.status === 404){
-                this.setState({
-                    showAlert: true,
-                    alertText: "User missing, unable to update password"
-                 });
-            }else{//500
-                this.setState({
-                    showAlert: true,
-                    alertText: "Something went wrong, try again later"
-                 });
-            }
-        })
+            })
+            .then((response) => {
+                if(response.status === 200){
+                    this.setState({
+                        showAlert: true,
+                        alertText: "Password updated!"
+                    });
+                }else if(response.status === 400){
+                    this.setState({
+                        showAlert: true,
+                        alertText: "Unable to update password due to bad data"
+                    });
+                }else if(response.status === 401){
+                    this.removeLoginDetails();
+                    this.setState({
+                        showAlert: true,
+                        alertText: "Login session lost, please log in again"
+                    });
+                    Restart();
+                }else if(response.status === 403){
+                    this.setState({
+                        showAlert: true,
+                        alertText: "You cannot update another users password"
+                    });
+                }else if(response.status === 404){
+                    this.setState({
+                        showAlert: true,
+                        alertText: "User missing, unable to update password"
+                    });
+                }else{//500
+                    this.setState({
+                        showAlert: true,
+                        alertText: "Something went wrong, try again later"
+                    });
+                }
+            })
+        }
     }
 
     render(){

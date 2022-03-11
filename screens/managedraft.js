@@ -112,6 +112,9 @@ class ManageDraftScreen extends Component {
                         <Text>DELETE DRAFT</Text>
                     </TouchableOpacity>
                 </View>
+                <TouchableOpacity style={style.managedraft_returnbutton} accessible={true} accessibilityLabel="Go back" accessibilityLabel="Return to your list of drafts" onPress={() => this.props.navigation.goBack()}>
+                    <Text>GO BACK</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

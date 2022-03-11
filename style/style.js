@@ -40,6 +40,8 @@ export default StyleSheet.create({
         justifyContent: "space-between"
     },
     post_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5
@@ -52,6 +54,8 @@ export default StyleSheet.create({
         paddingTop: 10
     },
     editpost_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
@@ -66,6 +70,8 @@ export default StyleSheet.create({
         paddingTop: 10
     },
     createpost_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         marginLeft: 10,
@@ -94,6 +100,8 @@ export default StyleSheet.create({
         marginBottom: 10
     },
     draft_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
@@ -115,12 +123,24 @@ export default StyleSheet.create({
         justifyContent: "space-between"
     },
     managedraft_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
         width: 105,
         marginLeft: 10,
         marginRight: 10
+    },
+    managedraft_returnbutton: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 105,
+        marginTop: 10,
+        alignSelf: "center"
     },
     friend_view: {
         display: "flex",
@@ -150,6 +170,8 @@ export default StyleSheet.create({
         paddingBottom: 10
     },
     viewprofile_button: {
+        display: "flex",
+        alignItems: "center",
         alignSelf: "flex-end",
         borderRadius: 15,
         backgroundColor: "lightblue",
@@ -162,6 +184,8 @@ export default StyleSheet.create({
         paddingTop: 10
     },
     search_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
@@ -186,6 +210,8 @@ export default StyleSheet.create({
         paddingLeft: 5
     },
     searchresult_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
@@ -216,6 +242,8 @@ export default StyleSheet.create({
         marginBottom: 10
     },
     friendreq_button: {
+        display: "flex",
+        alignItems: "center",
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
@@ -254,7 +282,8 @@ export default StyleSheet.create({
         backgroundColor: "lightblue",
         padding: 5,
         width: 110,
-        alignSelf: "center"
+        alignSelf: "center",
+        marginBottom: 10
     },
     editemail_text: {
         paddingLeft: 5
@@ -270,7 +299,8 @@ export default StyleSheet.create({
         backgroundColor: "lightblue",
         padding: 5,
         width: 110,
-        alignSelf: "center"
+        alignSelf: "center",
+        marginBottom: 10
     },
     editname_text: {
         paddingLeft: 5
@@ -286,7 +316,8 @@ export default StyleSheet.create({
         backgroundColor: "lightblue",
         padding: 5,
         width: 150,
-        alignSelf: "center"
+        alignSelf: "center",
+        marginBottom: 10
     },
     editpassword_text: {
         paddingLeft: 5
@@ -360,5 +391,15 @@ export default StyleSheet.create({
     },
     signup_text: {
         paddingLeft: 5
+    },
+    friendprofile_returnbutton: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 105,
+        marginTop: 10,
+        marginLeft: 100
     }
 });

@@ -17,6 +17,8 @@ class EditPhotoScreen extends Component{
             showAlert: false,
             alertText: ""
         };
+
+        this.props.navigation.setOptions({ headerShown: false });
     }
     
     updatePhoto = async (photo) => {
@@ -37,10 +39,7 @@ class EditPhotoScreen extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                this.setState({
-                    showAlert: true,
-                    alertText: "Updated photo!"
-                 });
+                this.props.navigation.navigate("ProfileNav");
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
@@ -84,6 +83,9 @@ class EditPhotoScreen extends Component{
             <View style={style.editphoto_view}>
                 <TouchableOpacity style={style.editphoto_button} accessible={true} accessibilityLabel="Choose new profile photo" onPress={() => this.choosePhoto()}>
                     <Text>CHOOSE A NEW PROFILE PHOTO</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={style.editphoto_button} accessible={true} accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+                    <Text>GO BACK</Text>
                 </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

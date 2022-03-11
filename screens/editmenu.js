@@ -6,6 +6,8 @@ import style from '../style/style.js';
 class EditMenuScreen extends Component {
     constructor(props){
         super(props);
+
+        this.props.navigation.setOptions({ headerShown: false });
     }
 
     render(){

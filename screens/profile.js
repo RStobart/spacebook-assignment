@@ -1,5 +1,6 @@
 import { Component } from "react/cjs/react.production.min";
 import { ScrollView, Text, Image, View } from "react-native";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
 import { Restart } from "fiction-expo-restart";
@@ -188,30 +189,66 @@ class ProfileScreen extends Component{
             keyNum++;
         });
 
-        return(
-            <ScrollView>
-                <View style={style.profile_view}>
-                    <Image style={style.profile_image} source={{uri: this.state.user_photo}}/>
-                    <View>
-                        <Text style={style.profile_text}>{this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
-                        <Text style={style.profile_text}>{this.state.user_info.friend_count} friends</Text>
-                    </View>
-                </View>
-                {postList}
+        let friendsText = "friends";
 
-                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
-                        show={this.state.showAlert}
-                        message={this.state.alertText}
-                        showConfirmButton={true}
-                        confirmText="OK"
-                        onConfirmPressed={() => {
-                            this.setState({
-                                showAlert: false 
-                             });
-                        }}
-                    />
-            </ScrollView>
-        )
+        if(this.state.user_info.friend_count == 1){
+            friendsText = "friend";
+        }
+
+        if(!this.state.own_profile){
+            return(
+                <ScrollView>
+                    <View style={style.profile_view}>
+                        <Image style={style.profile_image} source={{uri: this.state.user_photo}}/>
+                        <View>
+                            <Text style={style.profile_text}>{this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
+                            <Text style={style.profile_text}>{this.state.user_info.friend_count} {friendsText}</Text>
+                        </View>
+                        <TouchableOpacity style={style.friendprofile_returnbutton} accessible={true} accessibilityLabel="Go back" accessibilityHint="Return to your friends list" onPress={() => this.props.navigation.goBack()}>
+                            <Text>GO BACK</Text>
+                        </TouchableOpacity>
+                    </View>
+                    {postList}
+
+                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
+                            show={this.state.showAlert}
+                            message={this.state.alertText}
+                            showConfirmButton={true}
+                            confirmText="OK"
+                            onConfirmPressed={() => {
+                                this.setState({
+                                    showAlert: false 
+                                });
+                            }}
+                        />
+                </ScrollView>
+            )
+        } else {
+            return(
+                <ScrollView>
+                    <View style={style.profile_view}>
+                        <Image style={style.profile_image} source={{uri: this.state.user_photo}}/>
+                        <View>
+                            <Text style={style.profile_text}>{this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
+                            <Text style={style.profile_text}>{this.state.user_info.friend_count} friends</Text>
+                        </View>
+                    </View>
+                    {postList}
+
+                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
+                            show={this.state.showAlert}
+                            message={this.state.alertText}
+                            showConfirmButton={true}
+                            confirmText="OK"
+                            onConfirmPressed={() => {
+                                this.setState({
+                                    showAlert: false 
+                                });
+                            }}
+                        />
+                </ScrollView>
+            )
+        }
     }
 }
 

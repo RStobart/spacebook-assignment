@@ -17,6 +17,8 @@ class EditPasswordScreen extends Component{
             showAlert: false,
             alertText: ""
         };
+
+        this.props.navigation.setOptions({ headerShown: false });
     }
     
     updatePassword = async () => {
@@ -41,10 +43,7 @@ class EditPasswordScreen extends Component{
             })
             .then((response) => {
                 if(response.status === 200){
-                    this.setState({
-                        showAlert: true,
-                        alertText: "Password updated!"
-                    });
+                    this.props.navigation.navigate("ProfileNav");
                 }else if(response.status === 400){
                     this.setState({
                         showAlert: true,
@@ -85,6 +84,9 @@ class EditPasswordScreen extends Component{
                 <TextInput accessible={true} accessibilityLabel="New password field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} />
                 <TouchableOpacity style={style.editpassword_button} accessible={true} accessibilityLabel="Update password" onPress={() => this.updatePassword()}>
                     <Text>UPDATE PASSWORD</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={style.editpassword_button} accessible={true} accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+                    <Text>GO BACK</Text>
                 </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

@@ -17,6 +17,8 @@ class EditEmailScreen extends Component{
             showAlert: false,
             alertText: ""
         };
+
+        this.props.navigation.setOptions({ headerShown: false });
     }
     
     updateEmail = async () => {
@@ -42,10 +44,7 @@ class EditEmailScreen extends Component{
             })
             .then((response) => {
                 if(response.status === 200){
-                    this.setState({
-                        showAlert: true,
-                        alertText: "Email updated!"
-                    });
+                    this.props.navigation.navigate("ProfileNav");
                 }else if(response.status === 400){
                     this.setState({
                         showAlert: true,
@@ -86,6 +85,9 @@ class EditEmailScreen extends Component{
                 <TextInput accessible={true} accessibilityLabel="New email field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
                 <TouchableOpacity style={style.editemail_button} accessible={true} accessibilityLabel="Update Email" onPress={() => this.updateEmail()}>
                     <Text>UPDATE EMAIL</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={style.editemail_button} accessible={true} accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+                    <Text>GO BACK</Text>
                 </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

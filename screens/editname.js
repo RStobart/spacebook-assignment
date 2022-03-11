@@ -18,6 +18,8 @@ class EditNameScreen extends Component{
             showAlert: false,
             alertText: ""
         };
+
+        this.props.navigation.setOptions({ headerShown: false });
     }
     
     updateName = async () => {
@@ -36,10 +38,7 @@ class EditNameScreen extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                this.setState({
-                    showAlert: true,
-                    alertText: "Name updated!"
-                });
+                this.props.navigation.navigate("ProfileNav");
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,
@@ -81,6 +80,9 @@ class EditNameScreen extends Component{
                 <TextInput accessible={true} accessibilityLabel="New last name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
                 <TouchableOpacity style={style.editname_button}  accessible={true} accessibilityLabel="Update name" onPress={() => this.updateName()}>
                     <Text>UPDATE NAME</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={style.editname_button} accessible={true} accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+                    <Text>GO BACK</Text>
                 </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

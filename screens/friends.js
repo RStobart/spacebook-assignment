@@ -15,6 +15,8 @@ class FriendsScreen extends Component {
             alertText: ""
         }
 
+        this.props.navigation.setOptions({ headerShown: false });
+
         this.searchForUsers();
     }
 

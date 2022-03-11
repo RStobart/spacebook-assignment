@@ -30,7 +30,6 @@ class ManageDraftScreen extends Component {
     const userId = await AsyncStorage.getItem('@user_id');
     const draftList = JSON.parse(await AsyncStorage.getItem(`@drafts${userId}`));
     const newDraftList = [];
-    console.log(newText);
     draftList.forEach((thisDraft) => {
       if (thisDraft.draftId == this.props.route.params.draft.draftId) {
         thisDraft.text = newText;
@@ -117,7 +116,7 @@ class ManageDraftScreen extends Component {
             <Text>DELETE DRAFT</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity style={style.managedraft_returnbutton} accessible accessibilityLabel="Go back" accessibilityHint="Return to your list of" onPress={() => this.props.navigation.goBack()}>
+        <TouchableOpacity style={style.managedraft_returnbutton} accessible accessibilityLabel="Go back" accessibilityHint="Return to your list of drafts" onPress={() => this.props.navigation.goBack()}>
           <Text>GO BACK</Text>
         </TouchableOpacity>
 

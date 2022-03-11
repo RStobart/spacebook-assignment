@@ -66,7 +66,6 @@ class CreatePostScreen extends Component {
     } else {
       tempDrafts = JSON.parse(userDrafts);
     }
-    console.log(tempDrafts);
     tempDrafts.push({ draftId: (tempDrafts.length + 1), text: this.state.text });
     await AsyncStorage.setItem(`@drafts${userId}`, JSON.stringify(tempDrafts))
       .then(() => {

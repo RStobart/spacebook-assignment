@@ -69,7 +69,6 @@ class EditPhotoScreen extends Component {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       base64: true,
     });
-    console.log(photo);
     if (!photo.cancelled) {
       this.updatePhoto(photo);
     }
@@ -81,7 +80,7 @@ class EditPhotoScreen extends Component {
         <TouchableOpacity style={style.editphoto_button} accessible accessibilityLabel="Choose new profile photo" onPress={() => this.choosePhoto()}>
           <Text>CHOOSE A NEW PROFILE PHOTO</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.editphoto_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+        <TouchableOpacity style={style.editphoto_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.navigate("EditMenu")}>
           <Text>GO BACK</Text>
         </TouchableOpacity>
 

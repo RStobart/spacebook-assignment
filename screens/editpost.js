@@ -16,6 +16,8 @@ class EditPostScreen extends Component {
       showAlert: false,
       alertText: '',
     };
+
+    this.props.navigation.setOptions({ headerShown: false });
   }
 
   edit = async () => {
@@ -35,7 +37,7 @@ class EditPostScreen extends Component {
     })
       .then((response) => {
         if (response.status === 200) {
-          this.props.navigation.goBack();
+          this.props.navigation.navigate("Profile");
         } else if (response.status === 400) {
           this.setState({
             showAlert: true,

@@ -31,7 +31,7 @@ class FriendReqScreen extends Component {
       Restart();
     })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 20) {
           return response.json();
         } if (response.status === 401) {
           this.removeLoginDetails();

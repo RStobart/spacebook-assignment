@@ -83,7 +83,7 @@ class EditPasswordScreen extends Component {
         <TouchableOpacity style={style.editpassword_button} accessible accessibilityLabel="Update password" onPress={() => this.updatePassword()}>
           <Text>UPDATE PASSWORD</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.editpassword_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+        <TouchableOpacity style={style.editpassword_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.navigate()}>
           <Text>GO BACK</Text>
         </TouchableOpacity>
 

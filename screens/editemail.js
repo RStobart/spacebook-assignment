@@ -84,7 +84,7 @@ class EditEmailScreen extends Component {
         <TouchableOpacity style={style.editemail_button} accessible accessibilityLabel="Update Email" onPress={() => this.updateEmail()}>
           <Text>UPDATE EMAIL</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.editemail_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+        <TouchableOpacity style={style.editemail_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.navigate("EditMenu")}>
           <Text>GO BACK</Text>
         </TouchableOpacity>
 

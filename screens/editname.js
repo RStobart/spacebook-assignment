@@ -79,7 +79,7 @@ class EditNameScreen extends Component {
         <TouchableOpacity style={style.editname_button} accessible accessibilityLabel="Update name" onPress={() => this.updateName()}>
           <Text>UPDATE NAME</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={style.editname_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.goBack()}>
+        <TouchableOpacity style={style.editname_button} accessible accessibilityLabel="Go back" accessibilityHint="Return to the edit profile menu" onPress={() => this.props.navigation.navigate("EditMenu")}>
           <Text>GO BACK</Text>
         </TouchableOpacity>
 

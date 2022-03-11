@@ -1,10 +1,16 @@
 {
     "extends": "airbnb",
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "requireConfigFile": false
+    },
     "env": {
       "browser": true
     },
-    "plugins": ["react"],
+    "plugins": ["react", "react-native", "jsx"],
     "rules": {
       "react/jsx-filename-extension": [
         2,
@@ -12,6 +18,19 @@
           "extensions": [".js", ".jsx"]
         }
       ],
+      "camelcase": [1],
+      "class-methods-use-this": [1],
+      "no-undef": [1],
+      "no-param-reassign": [1],
+      "no-useless-constructor": [1],
+      "max-len": [1],
+      "react/no-unescaped-entities": [0],
+      "eqeqeq": [0],
+      "no-plusplus": [0],
+      "consistent-return": [0],
+      "react/prefer-stateless-function": [1],
+      "react/destructuring-assignment": [0],
+      "react/prop-types": [0],
       "react/forbid-prop-types": [0],
       "react/require-default-props": [0],
       "global-require": [0],

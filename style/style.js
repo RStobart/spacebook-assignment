@@ -157,4 +157,41 @@ export default StyleSheet.create({
         marginLeft: 100,
         width: 100
     },
+    search_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    search_button: {
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 65,
+        alignSelf: "center"
+    },
+    search_text: {
+        paddingLeft: 5
+    },
+    searchresult_view: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderStyle: "solid",
+        borderColor: "#000",
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 10
+    },
+    searchresult_text: {
+        paddingLeft: 5
+    },
+    friendreq_button: {
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 100,
+        marginTop: 5,
+        marginBottom: 5,
+        marginRight: 5 
+    },
 });

@@ -1,11 +1,12 @@
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchResult from '../components/searchresult.js'
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class SearchScreen extends Component {
     constructor(props){
@@ -68,10 +69,12 @@ class SearchScreen extends Component {
         });
 
         return(
-            <View>
-                <Text>Search for users</Text>
+            <View style={style.search_view}>
+                <Text style={style.search_text}>Search for users</Text>
                 <TextInput accessible={true} accessibilityLabel="Friend name search field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.search} onChangeText={(search) => this.setState({search})}/>
-                <Button accessible={true} accessibilityLabel="Search" accessibilityHint="Search for users" onPress={() => this.searchForUsers()} title="Search"/>
+                <TouchableOpacity style={style.search_button} accessible={true} accessibilityLabel="Search" accessibilityHint="Search for users" onPress={() => this.searchForUsers()}>
+                    <Text>SEARCH</Text>
+                </TouchableOpacity>
                 {searchResults}
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

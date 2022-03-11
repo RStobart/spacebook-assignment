@@ -1,9 +1,10 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class SearchResult extends Component{
     constructor(props){
@@ -61,9 +62,11 @@ class SearchResult extends Component{
 
     render(){
         return(
-            <View>
-                <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
-                <Button accessible={true} accessibilityLabel="Send friend request" onPress={() => this.sendFriendRequest()} title="Send friend request"/>
+            <View style={style.searchresult_view}>
+                <Text style={style.searchresult_text}>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
+                <TouchableOpacity style={style.friendreq_button} accessible={true} accessibilityLabel="Send friend request" onPress={() => this.sendFriendRequest()} title="Send friend request">
+                    <Text>SEND FRIEND REQUEST</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

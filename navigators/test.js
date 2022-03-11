@@ -8,6 +8,7 @@ import FriendsNavScreen from '../navigators/friendsprofilenav.js';
 import EditDetailsScreen from "./editdetails.js";
 import CreatePostScreen from "../screens/postcreation.js";
 import DraftsNavScreen from "./draftsnav.js";
+import style from '../style/style.js';
 
 class TestScreen extends Component {
     constructor(props) {
@@ -21,14 +22,14 @@ class TestScreen extends Component {
 
         return (
             <drawer.Navigator initialRouteName="ProfileNav">
-                <drawer.Screen name="ProfileNav" component={ProfileNavScreen} options={{ title: "Profile" }} initialParams={{ userId: this.props.route.params.userId }} />
-                <drawer.Screen name="Create Post" component={CreatePostScreen} />
-                <drawer.Screen name="Draft posts" component={DraftsNavScreen} />
-                <drawer.Screen name="Friends" component={FriendsNavScreen} />
-                <drawer.Screen name="Search" component={SearchScreen} />
-                <drawer.Screen name="Friend Requests" component={FriendReqScreen} />
-                <drawer.Screen name="Edit profile" component={EditDetailsScreen} />
-                <drawer.Screen name="Logout" component={LogoutScreen} />
+                <drawer.Screen name="ProfileNav" component={ProfileNavScreen} options={{ title: "Profile" , headerStyle: style.headerStyle }} initialParams={{ userId: this.props.route.params.userId }} />
+                <drawer.Screen name="Create Post" component={CreatePostScreen} options={{ headerStyle: style.headerStyle }} />
+                <drawer.Screen name="Draft posts" component={DraftsNavScreen} options={{ headerStyle: style.headerStyle }}  />
+                <drawer.Screen name="Friends" component={FriendsNavScreen} options={{ headerStyle: style.headerStyle }}  />
+                <drawer.Screen name="Search" component={SearchScreen} options={{ headerStyle: style.headerStyle }}  />
+                <drawer.Screen name="Friend Requests" component={FriendReqScreen} options={{ headerStyle: style.headerStyle }}  />
+                <drawer.Screen name="Edit profile" component={EditDetailsScreen} options={{ headerStyle: style.headerStyle }}  />
+                <drawer.Screen name="Logout" component={LogoutScreen} options={{ headerStyle: style.headerStyle }} />
             </drawer.Navigator>
         )
     }

@@ -22,6 +22,9 @@ class ManageDraftScreen extends Component {
                 alertText: ""
             };
         }
+        
+        this.props.navigation.setOptions({ headerShown: false });
+
     }
 
     updateDraft = async (newText) => {
@@ -112,7 +115,7 @@ class ManageDraftScreen extends Component {
                         <Text>DELETE DRAFT</Text>
                     </TouchableOpacity>
                 </View>
-                <TouchableOpacity style={style.managedraft_returnbutton} accessible={true} accessibilityLabel="Go back" accessibilityLabel="Return to your list of drafts" onPress={() => this.props.navigation.goBack()}>
+                <TouchableOpacity style={style.managedraft_returnbutton} accessible={true} accessibilityLabel="Go back" accessibilityHint="Return to your list of" onPress={() => this.props.navigation.goBack()}>
                     <Text>GO BACK</Text>
                 </TouchableOpacity>
 

@@ -401,5 +401,8 @@ export default StyleSheet.create({
         width: 105,
         marginTop: 10,
         marginLeft: 100
+    },
+    headerStyle: {
+        backgroundColor: "lightblue"
     }
 });

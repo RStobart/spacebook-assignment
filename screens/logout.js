@@ -54,7 +54,7 @@ class LogoutScreen extends Component {
                 <TouchableOpacity style={style.logout_button} accessible={true} accessibilityLabel="Log out" onPress={() => {this.logout()}}>
                     <Text>LOGOUT</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={style.logout_button} accessible={true} accessibilityLabel="Don't log out" onPress={() => {this.props.navigation.navigate("butts")}}>
+                <TouchableOpacity style={style.logout_button} accessible={true} accessibilityLabel="Don't log out" onPress={() => {this.props.navigation.navigate("ProfileNav")}}>
                     <Text>STAY LOGGED IN</Text>
                 </TouchableOpacity>
 

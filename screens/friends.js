@@ -79,7 +79,7 @@ class FriendsScreen extends Component {
             <View>
                 {friendResults}
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

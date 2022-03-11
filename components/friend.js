@@ -60,7 +60,7 @@ class Friend extends Component{
                 <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
                 <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

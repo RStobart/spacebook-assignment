@@ -11,7 +11,7 @@ class Draft extends Component {
         return (
             <View>
                 <Text>{this.props.draft.text}</Text>
-                <Button title="Manage draft" onPress={() => this.props.navigation.navigate("ManageDraft", { draft: this.props.draft })} />
+                <Button accessible={true} accessibilityLabel="Manage draft" title="Manage draft" onPress={() => this.props.navigation.navigate("ManageDraft", { draft: this.props.draft })} />
             </View>
         )
     }

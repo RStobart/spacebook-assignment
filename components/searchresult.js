@@ -63,9 +63,9 @@ class SearchResult extends Component{
         return(
             <View>
                 <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
-                <Button onPress={() => this.sendFriendRequest()} title="Send friend request"/>
+                <Button accessible={true} accessibilityLabel="Send friend request" onPress={() => this.sendFriendRequest()} title="Send friend request"/>
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

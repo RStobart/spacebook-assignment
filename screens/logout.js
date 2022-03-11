@@ -50,10 +50,10 @@ class LogoutScreen extends Component {
     render(){
         return(
             <View>
-                <Button onPress={() => {this.logout()}} title="Logout" />
-                <Button onPress={() => {this.props.navigation.navigate("butts")}} title="Stay logged in" />
+                <Button accessible={true} accessibilityLabel="Log out" onPress={() => {this.logout()}} title="Logout" />
+                <Button accessible={true} accessibilityLabel="Don't log out" onPress={() => {this.props.navigation.navigate("butts")}} title="Stay logged in" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

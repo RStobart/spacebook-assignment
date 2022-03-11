@@ -81,10 +81,10 @@ class EditEmailScreen extends Component{
 
         return(
             <View>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
-                <Button onPress={() => this.updateEmail()} />
+                <TextInput accessible={true} accessibilityLabel="New email field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
+                <Button accessible={true} accessibilityLabel="Update Email" onPress={() => this.updateEmail()} title="Update email" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

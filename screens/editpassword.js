@@ -22,7 +22,7 @@ class EditPasswordScreen extends Component{
         if(this.state.password.length < 6){
             this.setState({
                 showAlert: true,
-                alertText: "Password is too short"
+                alertText: "Password is too short, must be longer than 5 characters"
              });
         } else{
             let userToken = await AsyncStorage.getItem("@session_token");
@@ -80,10 +80,10 @@ class EditPasswordScreen extends Component{
 
         return(
             <View>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} />
-                <Button onPress={() => this.updatePassword()} />
+                <TextInput accessible={true} accessibilityLabel="New password field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} />
+                <Button accessible={true} accessibilityLabel="Update password" onPress={() => this.updatePassword()} title="Update password" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

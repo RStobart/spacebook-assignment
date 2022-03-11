@@ -103,10 +103,10 @@ class FriendRequest extends Component{
                 <View>
 
                     <Friend user={this.props.user}/>
-                    <Button onPress={() => this.accept()} title="Accept"/>
-                    <Button onPress={() => this.reject()} title="Reject"/>
+                    <Button accessible={true} accessibilityLabel="Accept" accessibilityHint="Accept the friend request" onPress={() => this.accept()} title="Accept"/>
+                    <Button accessible={true} accessibilityLabel="Reject" accessibilityHint="Reject the friend request" onPress={() => this.reject()} title="Reject"/>
 
-                    <AwesomeAlert
+                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

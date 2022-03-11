@@ -69,11 +69,11 @@ class SearchScreen extends Component {
 
         return(
             <View>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.search} onChangeText={(search) => this.setState({search})}/>
-                <Button onPress={() => this.searchForUsers()} title="Search"/>
+                <TextInput accessible={true} accessibilityLabel="Friend name search field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.search} onChangeText={(search) => this.setState({search})}/>
+                <Button accessible={true} accessibilityLabel="Search" accessibilityHint="Search for users" onPress={() => this.searchForUsers()} title="Search"/>
                 {searchResults}
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

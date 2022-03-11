@@ -172,7 +172,7 @@ class Post extends Component {
                     <Button onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} title="Edit post" />
                     <Button onPress={() => this.delete()} title="Delete post" />
 
-                    <AwesomeAlert
+                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}
@@ -192,10 +192,10 @@ class Post extends Component {
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
-                    <Button onPress={() => this.like()} title="Like" />
-                    <Button onPress={() => this.unlike()} title="Unlike" />
+                    <Button accessible={true} accessibilityLabel="Like" onPress={() => this.like()} title="Like" />
+                    <Button accessible={true} accessibilityLabel="Unlike" onPress={() => this.unlike()} title="Unlike" />
 
-                    <AwesomeAlert
+                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

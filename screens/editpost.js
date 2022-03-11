@@ -70,10 +70,10 @@ class EditPostScreen extends Component {
         return(
             <View>
                 <Text>Edit the post below</Text>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.text} onChangeText={(text) => this.setState({text})} />
-                <Button onPress={() => this.edit()} title="Done"/>
+                <TextInput accessible={true} accessibilityLabel="Post text field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.text} onChangeText={(text) => this.setState({text})} />
+                <Button accessible={true} accessibilityLabel="Done" accessibilityHint="Finish editing the post" onPress={() => this.edit()} title="Done"/>
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

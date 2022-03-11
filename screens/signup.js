@@ -76,17 +76,17 @@ class SignupScreen extends Component {
     render(){
         return(
             <View>
-                <Text>First name:</Text>
+                <Text accessible={true} accessibilityLabel="First name field">First name:</Text>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
-                <Text>Last name:</Text>
+                <Text accessible={true} accessibilityLabel="Last name field">Last name:</Text>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
-                <Text>Email:</Text>
+                <Text accessible={true} accessibilityLabel="Email field">Email:</Text>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
-                <Text>Password:</Text>
+                <Text accessible={true} accessibilityLabel="Password field">Password:</Text>
                 <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} secureTextEntry />
-                <Button onPress={() => this.login()} title="Create account" />
+                <Button accessible={true} accessibilityLabel="Create account" onPress={() => this.login()} title="Create account" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

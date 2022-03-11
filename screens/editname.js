@@ -74,11 +74,11 @@ class EditNameScreen extends Component{
 
         return(
             <View>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
-                <Button onPress={() => this.updateName()} />
+                <TextInput accessible={true} accessibilityLabel="New first name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
+                <TextInput accessible={true} accessibilityLabel="New last name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
+                <Button accessible={true} accessibilityLabel="Update name" onPress={() => this.updateName()} title="Update name" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

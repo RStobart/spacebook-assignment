@@ -88,11 +88,11 @@ class ManageDraftScreen extends Component {
         return (
             <View>
                 <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.props.route.params.draft.text} onChangeText={(text) => this.setState({ text })} />
-                <Button title="Post" onPress={() => this.post()} />
-                <Button title="Update draft" onPress={() => this.updateDraft()} />
-                <Button title="Delete draft" onPress={() => this.deleteDraft()} />
+                <Button accessible={true} accessibilityLabel="Create post" title="Create post" onPress={() => this.post()} />
+                <Button accessible={true} accessibilityLabel="Update draft" title="Update draft" onPress={() => this.updateDraft()} />
+                <Button accessible={true} accessibilityLabel="Delete draft" title="Delete draft" onPress={() => this.deleteDraft()} />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

@@ -29,7 +29,7 @@ class EditPhotoScreen extends Component{
                 'Content-Type': 'image/png',
                 'X-Authorization': userToken
             },
-            body: photoBlob//data is a bit poo, find out why
+            body: photoBlob
         }).catch((err) => {
             console.log(err);
             Restart();
@@ -78,9 +78,9 @@ class EditPhotoScreen extends Component{
     render(){
         return(
             <View>
-                <Button onPress={() => this.choosePhoto()} title="Choose new profile photo" />
+                <Button accessible={true} accessibilityLabel="Choose new profile photo" onPress={() => this.choosePhoto()} title="Choose new profile photo" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

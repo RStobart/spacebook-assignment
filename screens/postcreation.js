@@ -83,11 +83,11 @@ class CreatePostScreen extends Component {
         return (
             <View>
                 <Text>What do you want to say?</Text>
-                <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.text} onChangeText={(text) => this.setState({ text })} />
-                <Button title="Post" onPress={() => this.post()} />
-                <Button title="Save as draft" onPress={() => this.saveDraft()} />
+                <TextInput accessible={true} accessibilityLabel="Text input for post" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.text} onChangeText={(text) => this.setState({ text })} />
+                <Button accessible={true} accessibilityLabel="Create post" title="Create post" onPress={() => this.post()} />
+                <Button accessible={true} accessibilityLabel="Save as draft" title="Save as draft" onPress={() => this.saveDraft()} />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

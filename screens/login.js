@@ -63,12 +63,12 @@ class LoginScreen extends Component {
 
         return (
             <View>
-                <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.email} onChangeText={(email) => this.setState({ email })} />
-                <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.password} onChangeText={(password) => this.setState({ password })} secureTextEntry />
-                <Button onPress={() => this.login()} title="Login" />
-                <Button onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?" />
+                <TextInput accessible={true} accessibilityLabel="Email field" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.email} onChangeText={(email) => this.setState({ email })} />
+                <TextInput accessible={true} accessibilityLabel="Password field" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.password} onChangeText={(password) => this.setState({ password })} secureTextEntry />
+                <Button accessible={true} accessibilityLabel="Log in" onPress={() => this.login()} title="Login" />
+                <Button accessible={true} accessibilityLabel="Sign up and create and account" onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?" />
 
-                <AwesomeAlert
+                <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
                         showConfirmButton={true}

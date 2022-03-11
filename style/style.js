@@ -185,7 +185,7 @@ export default StyleSheet.create({
     searchresult_text: {
         paddingLeft: 5
     },
-    friendreq_button: {
+    searchresult_button: {
         borderRadius: 15,
         backgroundColor: "lightblue",
         padding: 5,
@@ -193,5 +193,39 @@ export default StyleSheet.create({
         marginTop: 5,
         marginBottom: 5,
         marginRight: 5 
+    },
+    friendreq_view: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderStyle: "solid",
+        borderColor: "#000",
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 10
+    },
+    friendreq_text: {
+        paddingLeft: 5,
+        marginTop: 10
+    },
+    friendreq_buttonview: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 10
+    },
+    friendreq_button: {
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 60,
+        marginTop: 5,
+        marginBottom: 5,
+        marginRight: 5 
+    },
+    friendreq_defaultview: {
+        display: "flex",
+        alignItems: "center"
     },
 });

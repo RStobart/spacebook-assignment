@@ -64,7 +64,7 @@ class SearchResult extends Component{
         return(
             <View style={style.searchresult_view}>
                 <Text style={style.searchresult_text}>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
-                <TouchableOpacity style={style.friendreq_button} accessible={true} accessibilityLabel="Send friend request" onPress={() => this.sendFriendRequest()} title="Send friend request">
+                <TouchableOpacity style={style.searchresult_button} accessible={true} accessibilityLabel="Send friend request" onPress={() => this.sendFriendRequest()} title="Send friend request">
                     <Text>SEND FRIEND REQUEST</Text>
                 </TouchableOpacity>
 

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import FriendRequest from '../components/friendrequest.js';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class FriendReqScreen extends Component{
 
@@ -66,7 +67,7 @@ class FriendReqScreen extends Component{
 
         if(requestList.length === 0){
             return(
-                <View>
+                <View style={style.friendreq_defaultview}>
                     <Text>Noone wants to be your friend atm :(</Text>
                 </View>
             )

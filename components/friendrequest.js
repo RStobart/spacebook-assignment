@@ -1,10 +1,10 @@
 import { Component } from "react/cjs/react.production.min";
-import { View } from "react-native";
-import { Button } from "react-native-web";
+import { View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Friend from "./friend";
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class FriendRequest extends Component{
     constructor(props){
@@ -33,7 +33,7 @@ class FriendRequest extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    alertText: this.props.user.user_givenname + " " + this.props.user.user_familyname + " is now your friend"
+                    alertText: this.props.user.first_name + " " + this.props.user.last_name + " is now your friend"
                 });
                 return this.setState({
                     hide: true
@@ -71,7 +71,7 @@ class FriendRequest extends Component{
             if(response.status === 200){
                 this.setState({
                     showAlert: true,
-                    alertText: "Freind request from " + this.props.user.user_givenname + " " + this.props.user.user_familyname + " rejected"
+                    alertText: "Friend request from " + this.props.user.first_name + " " + this.props.user.last_name + " rejected"
                 });
                 return this.setState({
                     hide: true
@@ -100,11 +100,16 @@ class FriendRequest extends Component{
     render(){
         if(!this.state.hide){
             return(
-                <View>
-
-                    <Friend user={this.props.user}/>
-                    <Button accessible={true} accessibilityLabel="Accept" accessibilityHint="Accept the friend request" onPress={() => this.accept()} title="Accept"/>
-                    <Button accessible={true} accessibilityLabel="Reject" accessibilityHint="Reject the friend request" onPress={() => this.reject()} title="Reject"/>
+                <View style={style.friendreq_view}>
+                    <Text style={style.friendreq_text}>{this.props.user.first_name} {this.props.user.last_name}</Text>
+                    <View style={style.friendreq_buttonview}>
+                        <TouchableOpacity style={style.friendreq_button} accessible={true} accessibilityLabel="Accept" accessibilityHint="Accept the friend request" onPress={() => this.accept()} >
+                            <Text>ACCEPT</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={style.friendreq_button} accessible={true} accessibilityLabel="Reject" accessibilityHint="Reject the friend request" onPress={() => this.reject()} >
+                            <Text>REJECT</Text>
+                        </TouchableOpacity>
+                    </View>
 
                     <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

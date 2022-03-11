@@ -170,13 +170,14 @@ class Post extends Component {
             likeText = "like"
         }
 
+        let postTime = new Date(this.props.post.timestamp);
 
         if (this.props.logged_user_id == this.props.post.author.user_id) {
             return (
                 <View>
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                     <Text>{this.props.post.text}</Text>
-                    <Text>{this.props.post.timestamp}</Text>
+                    <Text>{postTime.getHours()}:{postTime.getMinutes()} {postTime.getDay()}/{postTime.getMonth()}/{postTime.getFullYear()}</Text>
                     <Text>{this.props.post.numLikes} {likeText}</Text>
                     <Button onPress={() => this.like()} title="Like" />
                     <Button onPress={() => this.unlike()} title="Unlike" />

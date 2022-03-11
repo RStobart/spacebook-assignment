@@ -36,7 +36,10 @@ class EditPhotoScreen extends Component{
         })
         .then((response) => {
             if(response.status === 200){
-                //Hooray, updated
+                this.setState({
+                    showAlert: true,
+                    alertText: "Updated photo!"
+                 });
             }else if(response.status === 400){
                 this.setState({
                     showAlert: true,

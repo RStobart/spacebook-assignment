@@ -76,14 +76,14 @@ class SignupScreen extends Component {
     render(){
         return(
             <View>
-                <Text accessible={true} accessibilityLabel="First name field">First name:</Text>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
-                <Text accessible={true} accessibilityLabel="Last name field">Last name:</Text>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
-                <Text accessible={true} accessibilityLabel="Email field">Email:</Text>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
-                <Text accessible={true} accessibilityLabel="Password field">Password:</Text>
-                <TextInput style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} secureTextEntry />
+                <Text>First name:</Text>
+                <TextInput accessible={true} accessibilityLabel="First name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
+                <Text>Last name:</Text>
+                <TextInput accessible={true} accessibilityLabel="Last name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
+                <Text>Email:</Text>
+                <TextInput accessible={true} accessibilityLabel="Email field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
+                <Text>Password:</Text>
+                <TextInput accessible={true} accessibilityLabel="Password field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} secureTextEntry />
                 <Button accessible={true} accessibilityLabel="Create account" onPress={() => this.login()} title="Create account" />
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

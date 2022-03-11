@@ -1,6 +1,6 @@
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchResult from '../components/searchresult.js'
@@ -69,6 +69,7 @@ class SearchScreen extends Component {
 
         return(
             <View>
+                <Text>Search for users</Text>
                 <TextInput accessible={true} accessibilityLabel="Friend name search field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.search} onChangeText={(search) => this.setState({search})}/>
                 <Button accessible={true} accessibilityLabel="Search" accessibilityHint="Search for users" onPress={() => this.searchForUsers()} title="Search"/>
                 {searchResults}

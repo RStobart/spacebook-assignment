@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -80,6 +80,7 @@ class EditPasswordScreen extends Component{
 
         return(
             <View>
+                <Text>Enter new password:</Text>
                 <TextInput accessible={true} accessibilityLabel="New password field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} />
                 <Button accessible={true} accessibilityLabel="Update password" onPress={() => this.updatePassword()} title="Update password" />
 

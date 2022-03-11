@@ -1,5 +1,6 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text, Image, Button } from "react-native";
+import { Button } from 'react-native-web';
+import { View, Text, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';

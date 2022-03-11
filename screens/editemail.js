@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -81,6 +81,7 @@ class EditEmailScreen extends Component{
 
         return(
             <View>
+                <Text>Enter new email:</Text>
                 <TextInput accessible={true} accessibilityLabel="New email field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
                 <Button accessible={true} accessibilityLabel="Update Email" onPress={() => this.updateEmail()} title="Update email" />
 

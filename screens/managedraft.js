@@ -87,6 +87,7 @@ class ManageDraftScreen extends Component {
     render() {
         return (
             <View>
+                <Text>Draft {this.props.route.params.draft.draftId}</Text>
                 <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.props.route.params.draft.text} onChangeText={(text) => this.setState({ text })} />
                 <Button accessible={true} accessibilityLabel="Create post" title="Create post" onPress={() => this.post()} />
                 <Button accessible={true} accessibilityLabel="Update draft" title="Update draft" onPress={() => this.updateDraft()} />

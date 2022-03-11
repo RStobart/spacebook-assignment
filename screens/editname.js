@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -74,7 +74,9 @@ class EditNameScreen extends Component{
 
         return(
             <View>
+                <Text>Enter new first name:</Text>
                 <TextInput accessible={true} accessibilityLabel="New first name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
+                <Text>Enter new last name:</Text>
                 <TextInput accessible={true} accessibilityLabel="New last name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
                 <Button accessible={true} accessibilityLabel="Update name" onPress={() => this.updateName()} title="Update name" />
 

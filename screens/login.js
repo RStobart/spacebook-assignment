@@ -1,6 +1,6 @@
 import { TextInput } from "react-native-gesture-handler";
 import { Button } from "react-native-web";
-import { View } from "react-native";
+import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -63,7 +63,9 @@ class LoginScreen extends Component {
 
         return (
             <View>
+                <Text>Enter email:</Text>
                 <TextInput accessible={true} accessibilityLabel="Email field" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.email} onChangeText={(email) => this.setState({ email })} />
+                <Text>Enter password:</Text>
                 <TextInput accessible={true} accessibilityLabel="Password field" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.password} onChangeText={(password) => this.setState({ password })} secureTextEntry />
                 <Button accessible={true} accessibilityLabel="Log in" onPress={() => this.login()} title="Login" />
                 <Button accessible={true} accessibilityLabel="Sign up and create and account" onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?" />

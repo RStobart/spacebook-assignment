@@ -39,7 +39,7 @@ class Post extends Component {
                     alertText: "Login session lost, please log in again"
                 });
                 Restart();
-                } else if (response.status === 403) {
+                } else if (response.status === 403) {//Server continues to return 200s rather than 403s on persistent liking
                     if (this.props.logged_user_id == this.props.post.author.user_id){
                         this.setState({
                             showAlert: true,
@@ -81,6 +81,11 @@ class Post extends Component {
             .then((response) => {
                 if (response.status === 200) {
                     //Post unliked
+                }else if (response.status === 400) {//Server returns 400 rather than 403
+                    this.setState({
+                        showAlert: true,
+                        alertText: "You cant unlike a post youe haven't liked"
+                     });
                 } else if (response.status === 401) {
                     this.removeLoginDetails();
                     this.setState({
@@ -97,7 +102,7 @@ class Post extends Component {
                     }else{
                         this.setState({
                             showAlert: true,
-                            alertText: "You have already liked this post"
+                            alertText: "You cant unlike a post youe haven't liked"
                         });
                     }
                 } else if (response.status === 404) {
@@ -160,6 +165,11 @@ class Post extends Component {
     }
 
     render() {
+        let likeText = "Likes"
+        if(this.props.post.numLikes == 1){
+            likeText = "like"
+        }
+
 
         if (this.props.logged_user_id == this.props.post.author.user_id) {
             return (
@@ -167,6 +177,7 @@ class Post extends Component {
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
+                    <Text>{this.props.post.numLikes} {likeText}</Text>
                     <Button onPress={() => this.like()} title="Like" />
                     <Button onPress={() => this.unlike()} title="Unlike" />
                     <Button onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} title="Edit post" />
@@ -192,6 +203,7 @@ class Post extends Component {
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                     <Text>{this.props.post.text}</Text>
                     <Text>{this.props.post.timestamp}</Text>
+                    <Text>{this.props.post.numLikes} {likeText}</Text>
                     <Button accessible={true} accessibilityLabel="Like" onPress={() => this.like()} title="Like" />
                     <Button accessible={true} accessibilityLabel="Unlike" onPress={() => this.unlike()} title="Unlike" />
 

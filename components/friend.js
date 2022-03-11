@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Button } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
@@ -59,6 +59,7 @@ class Friend extends Component{
             <View>
                 <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
                 <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
+                <Button accessible={true} accessibilityLabel="View profile of this user" onPress={() => this.props.navigation.navigate("Profile", {userId: this.props.user.user_id})} title="View profile" />
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

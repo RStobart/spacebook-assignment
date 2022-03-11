@@ -62,7 +62,7 @@ class FriendsScreen extends Component {
 
         this.state.friends.forEach((thisFriend) => {
             friendResults.push(
-                <Friend key={keyNum} user={thisFriend} />
+                <Friend key={keyNum} user={thisFriend} navigation={this.props.navigation} />
             );
             keyNum++;
         });

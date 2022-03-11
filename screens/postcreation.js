@@ -27,14 +27,14 @@ class CreatePostScreen extends Component {
                 'Content-Type': 'application/json',
                 'X-Authorization': userToken
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({text: this.state.text})
         }).catch((err) => {
             console.log(err);
             Restart();
         })
             .then((response) => {
                 if (response.status === 201) {
-                    //Posted successfully
+                    this.props.navigation.navigate("ProfileNav");
                 } else if (response.status === 401) {
                     this.removeLoginDetails();
                     this.setState({
@@ -61,7 +61,6 @@ class CreatePostScreen extends Component {
         let userDrafts = await AsyncStorage.getItem("@drafts" + userId);
         let tempDrafts = [];
         if (userDrafts == null || userDrafts == "\"[]\"") {
-            console.log("nullset");
             tempDrafts = [];
         }
         else {
@@ -71,10 +70,7 @@ class CreatePostScreen extends Component {
         tempDrafts.push({ "draftId": (tempDrafts.length + 1), "text": this.state.text });
         await AsyncStorage.setItem("@drafts" + userId, JSON.stringify(tempDrafts))
         .then(() => {
-            this.setState({
-                showAlert: true,
-                alertText: "Saved draft"
-             });
+            this.props.navigation.navigate("Draft posts");
         });
     }
 

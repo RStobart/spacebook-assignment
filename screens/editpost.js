@@ -27,7 +27,7 @@ class EditPostScreen extends Component {
                 'Content-Type': 'application/json',
                 'X-Authorization': userToken
             },
-            body: JSON.stringify(this.state)
+            body: JSON.stringify({text: this.state.text})
         }).catch((err) => {
             console.log(err);
             Restart();

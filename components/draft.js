@@ -10,6 +10,7 @@ class Draft extends Component {
     render() {
         return (
             <View>
+                <Text>Draft {this.props.draft.draftId}</Text>
                 <Text>{this.props.draft.text}</Text>
                 <Button accessible={true} accessibilityLabel="Manage draft" title="Manage draft" onPress={() => this.props.navigation.navigate("ManageDraft", { draft: this.props.draft })} />
             </View>

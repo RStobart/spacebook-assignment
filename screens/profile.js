@@ -26,6 +26,7 @@ class ProfileScreen extends Component{
     componentDidMount() {
         this.checkIfOwnProfile();
     }
+
     
     checkIfOwnProfile = async () => { 
         let ownId = await AsyncStorage.getItem("@user_id")
@@ -75,7 +76,9 @@ class ProfileScreen extends Component{
         })
         .then(async (user_info) => {
             this.setState({user_info});
-        })
+        }).then(async ()=>{
+            this.props.navigation.addListener('focus', () => this.loadDetailsAndPosts(this.state.user_info.user_id));            
+        });
     }
 
     getUserPosts = async (userId) => {

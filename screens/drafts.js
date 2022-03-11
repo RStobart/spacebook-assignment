@@ -16,6 +16,7 @@ class DraftsScreen extends Component {
 
     componentDidMount() {
         this.getUserDrafts();
+        this.props.navigation.addListener('focus', () => this.getUserDrafts())
     }
 
     getUserDrafts = async () => {
@@ -38,7 +39,6 @@ class DraftsScreen extends Component {
         }
         else {
             this.state.drafts.forEach((thisDraft) => {
-                console.log(thisDraft);
                 draftList.push(
                     <Draft navigation={this.props.navigation} key={keyNum} draft={thisDraft} />
                 );

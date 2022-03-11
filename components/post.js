@@ -11,7 +11,8 @@ class Post extends Component {
 
         this.state = {
             showAlert: false,
-            alertText: ""
+            alertText: "",
+            hidden: false
         }
 
     }
@@ -134,10 +135,7 @@ class Post extends Component {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    this.setState({
-                        showAlert: true,
-                        alertText: "Deleted post!"
-                    });
+                    this.setState({hidden: true});
                 } else if (response.status === 401) {
                     this.removeLoginDetails();
                     this.setState({
@@ -172,7 +170,21 @@ class Post extends Component {
 
         let postTime = new Date(this.props.post.timestamp);
 
-        if (this.props.logged_user_id == this.props.post.author.user_id) {
+        if(this.state.hidden){
+            return(<View>
+                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
+                            show={this.state.showAlert}
+                            message={this.state.alertText}
+                            showConfirmButton={true}
+                            confirmText="OK"
+                            onConfirmPressed={() => {
+                                this.setState({
+                                    showAlert: false 
+                                });
+                            }}
+                        />
+                    </View>)
+        }else if (this.props.logged_user_id == this.props.post.author.user_id) {
             return (
                 <View>
                     <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>

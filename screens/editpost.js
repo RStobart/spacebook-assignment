@@ -1,10 +1,11 @@
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { TextInput } from "react-native-gesture-handler";
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class EditPostScreen extends Component {
     constructor(props){
@@ -68,10 +69,12 @@ class EditPostScreen extends Component {
 
     render(){
         return(
-            <View>
-                <Text>Edit the post below</Text>
+            <View style={style.editpost_view}>
+                <Text style={style.editpost_text}>Edit the post below</Text>
                 <TextInput accessible={true} accessibilityLabel="Post text field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.text} onChangeText={(text) => this.setState({text})} />
-                <Button accessible={true} accessibilityLabel="Done" accessibilityHint="Finish editing the post" onPress={() => this.edit()} title="Done"/>
+                <TouchableOpacity style={style.editpost_button} accessible={true} accessibilityLabel="Done" accessibilityHint="Finish editing the post" onPress={() => this.edit()}>
+                    <Text>DONE</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

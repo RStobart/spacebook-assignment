@@ -1,9 +1,10 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class Post extends Component {
     constructor(props) {
@@ -171,31 +172,24 @@ class Post extends Component {
         let postTime = new Date(this.props.post.timestamp);
 
         if(this.state.hidden){
-            return(<View>
-                    <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
-                            show={this.state.showAlert}
-                            message={this.state.alertText}
-                            showConfirmButton={true}
-                            confirmText="OK"
-                            onConfirmPressed={() => {
-                                this.setState({
-                                    showAlert: false 
-                                });
-                            }}
-                        />
-                    </View>)
+            return(<View />)
         }else if (this.props.logged_user_id == this.props.post.author.user_id) {
             return (
-                <View>
-                    <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
-                    <Text>{this.props.post.text}</Text>
-                    <Text>{postTime.getHours()}:{postTime.getMinutes()} {postTime.getDay()}/{postTime.getMonth()}/{postTime.getFullYear()}</Text>
-                    <Text>{this.props.post.numLikes} {likeText}</Text>
-                    <Button onPress={() => this.like()} title="Like" />
-                    <Button onPress={() => this.unlike()} title="Unlike" />
-                    <Button onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} title="Edit post" />
-                    <Button onPress={() => this.delete()} title="Delete post" />
-
+                <View style={style.post}>
+                    <View style={style.inner_post}>
+                        <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
+                        <Text>{this.props.post.text}</Text>
+                        <View style={style.post_likeview}>
+                            <Text>{postTime.getHours()}:{postTime.getMinutes()} {postTime.getDay()}/{postTime.getMonth()}/{postTime.getFullYear()}</Text>
+                            <Text>{this.props.post.numLikes} {likeText}</Text>
+                        </View>
+                        <View style={style.post_buttonview}>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.like()} ><Text>LIKE</Text></TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.unlike()} ><Text>UNLIKE</Text></TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} ><Text>EDIT POST</Text></TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.delete()} ><Text>DELETE POST</Text></TouchableOpacity>
+                        </View>
+                    </View>
                     <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}
@@ -212,14 +206,19 @@ class Post extends Component {
         }
         else {
             return (
-                <View>
-                    <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
-                    <Text>{this.props.post.text}</Text>
-                    <Text>{this.props.post.timestamp}</Text>
-                    <Text>{this.props.post.numLikes} {likeText}</Text>
-                    <Button accessible={true} accessibilityLabel="Like" onPress={() => this.like()} title="Like" />
-                    <Button accessible={true} accessibilityLabel="Unlike" onPress={() => this.unlike()} title="Unlike" />
-
+                <View style={style.post}>
+                    <View style={style.inner_post}>
+                        <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
+                        <Text>{this.props.post.text}</Text>
+                        <View style={style.post_likeview}>
+                            <Text>{postTime.getHours()}:{postTime.getMinutes()} {postTime.getDay()}/{postTime.getMonth()}/{postTime.getFullYear()}</Text>
+                            <Text>{this.props.post.numLikes} {likeText}</Text>
+                        </View>
+                        <View style={style.post_buttonview}>
+                            <TouchableOpacity style={style.post_button} accessible={true} accessibilityLabel="Like" onPress={() => this.like()}><Text>LIKE</Text></TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} accessible={true} accessibilityLabel="Unlike" onPress={() => this.unlike()}><Text>UNLIKE</Text></TouchableOpacity>
+                        </View>
+                    </View>
                     <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}
                         message={this.state.alertText}

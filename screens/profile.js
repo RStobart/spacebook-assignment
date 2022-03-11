@@ -1,9 +1,10 @@
 import { Component } from "react/cjs/react.production.min";
-import { ScrollView, Text, Image } from "react-native";
+import { ScrollView, Text, Image, View } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
 import { Restart } from "fiction-expo-restart";
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class ProfileScreen extends Component{
 
@@ -189,10 +190,13 @@ class ProfileScreen extends Component{
 
         return(
             <ScrollView>
-                <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
-                <Text>Name: {this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
-                <Text>{this.state.user_info.friend_count} friends</Text>
-                <Text>Posts: </Text>
+                <View style={style.profile_view}>
+                    <Image style={style.profile_image} source={{uri: this.state.user_photo}}/>
+                    <View>
+                        <Text style={style.profile_text}>{this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
+                        <Text style={style.profile_text}>{this.state.user_info.friend_count} friends</Text>
+                    </View>
+                </View>
                 {postList}
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

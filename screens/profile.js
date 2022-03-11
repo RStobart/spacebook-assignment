@@ -33,7 +33,7 @@ class ProfileScreen extends Component{
     checkIfOwnProfile = async () => { 
         let ownId = await AsyncStorage.getItem("@user_id")
         this.setState({logged_user_id: ownId})
-        if(ownId === this.props.route.params.userId){
+        if(ownId == this.props.route.params.userId){
             this.setState({own_profile: true});
             this.loadDetailsAndPosts(ownId);
         }

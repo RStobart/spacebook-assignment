@@ -1,10 +1,11 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class EditEmailScreen extends Component{
 
@@ -80,10 +81,12 @@ class EditEmailScreen extends Component{
     render(){
 
         return(
-            <View>
-                <Text>Enter new email:</Text>
+            <View style={style.editemail_view}>
+                <Text style={style.editemail_text}>Enter new email:</Text>
                 <TextInput accessible={true} accessibilityLabel="New email field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
-                <Button accessible={true} accessibilityLabel="Update Email" onPress={() => this.updateEmail()} title="Update email" />
+                <TouchableOpacity style={style.editemail_button} accessible={true} accessibilityLabel="Update Email" onPress={() => this.updateEmail()}>
+                    <Text>UPDATE EMAIL</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

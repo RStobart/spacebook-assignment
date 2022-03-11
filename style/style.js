@@ -228,4 +228,77 @@ export default StyleSheet.create({
         display: "flex",
         alignItems: "center"
     },
+    editprofile_view: {
+        display: "flex",
+        alignItems: "center",
+    },
+    editprofile_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 125,
+        marginTop: 5,
+        marginBottom: 5,
+        marginRight: 5 
+    },
+    editemail_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    editemail_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 110,
+        alignSelf: "center"
+    },
+    editemail_text: {
+        paddingLeft: 5
+    },
+    editname_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    editname_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 110,
+        alignSelf: "center"
+    },
+    editname_text: {
+        paddingLeft: 5
+    },
+    editpassword_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    editpassword_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 150,
+        alignSelf: "center"
+    },
+    editpassword_text: {
+        paddingLeft: 5
+    },
+    editphoto_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 225,
+        alignSelf: "center",
+        marginTop: 10
+    },
 });

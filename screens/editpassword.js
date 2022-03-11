@@ -1,10 +1,11 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class EditPasswordScreen extends Component{
 
@@ -79,10 +80,12 @@ class EditPasswordScreen extends Component{
     render(){
 
         return(
-            <View>
-                <Text>Enter new password:</Text>
+            <View style={style.editemail_view}>
+                <Text style={style.editpassword_text}>Enter new password:</Text>
                 <TextInput accessible={true} accessibilityLabel="New password field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} />
-                <Button accessible={true} accessibilityLabel="Update password" onPress={() => this.updatePassword()} title="Update password" />
+                <TouchableOpacity style={style.editpassword_button} accessible={true} accessibilityLabel="Update password" onPress={() => this.updatePassword()}>
+                    <Text>UPDATE PASSWORD</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

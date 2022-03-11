@@ -1,10 +1,11 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class EditNameScreen extends Component{
 
@@ -73,12 +74,14 @@ class EditNameScreen extends Component{
     render(){
 
         return(
-            <View>
-                <Text>Enter new first name:</Text>
+            <View style={style.editname_view}>
+                <Text style={style.editname_text}>Enter new first name:</Text>
                 <TextInput accessible={true} accessibilityLabel="New first name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
-                <Text>Enter new last name:</Text>
+                <Text style={style.editname_text}>Enter new last name:</Text>
                 <TextInput accessible={true} accessibilityLabel="New last name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
-                <Button accessible={true} accessibilityLabel="Update name" onPress={() => this.updateName()} title="Update name" />
+                <TouchableOpacity style={style.editname_button}  accessible={true} accessibilityLabel="Update name" onPress={() => this.updateName()}>
+                    <Text>UPDATE NAME</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

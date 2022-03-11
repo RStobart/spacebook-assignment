@@ -1,10 +1,11 @@
 import { Component } from "react/cjs/react.production.min";
-import { View } from "react-native";
-import { Button } from "react-native-web";
+import { View, Text } from "react-native";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class EditPhotoScreen extends Component{
 
@@ -81,7 +82,9 @@ class EditPhotoScreen extends Component{
     render(){
         return(
             <View>
-                <Button accessible={true} accessibilityLabel="Choose new profile photo" onPress={() => this.choosePhoto()} title="Choose new profile photo" />
+                <TouchableOpacity style={style.editphoto_button} accessible={true} accessibilityLabel="Choose new profile photo" onPress={() => this.choosePhoto()}>
+                    <Text>CHOOSE A NEW PROFILE PHOTO</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

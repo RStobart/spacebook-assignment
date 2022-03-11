@@ -1,9 +1,10 @@
 import { Component } from "react/cjs/react.production.min";
-import { Button } from 'react-native-web';
+import { TouchableOpacity } from 'react-native-web';
 import { View, Text, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class Friend extends Component{
     constructor(props){
@@ -57,10 +58,16 @@ class Friend extends Component{
 
     render(){
         return(
-            <View>
-                <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
-                <Text>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
-                <Button accessible={true} accessibilityLabel="View profile of this user" onPress={() => this.props.navigation.navigate("Profile", {userId: this.props.user.user_id})} title="View profile" />
+            <View style={style.friend_view}>
+                <View style={style.friend_profileview}>
+                    <Image style={style.friend_image} source={{uri: this.state.user_photo}}/>
+                    <View>
+                        <Text style={style.friend_text}>{this.props.user.user_givenname} {this.props.user.user_familyname}</Text>
+                    </View>
+                    <TouchableOpacity style={style.viewprofile_button} accessible={true} accessibilityLabel="View profile of this user" onPress={() => this.props.navigation.navigate("Profile", {userId: this.props.user.user_id})}>
+                        <Text>VIEW PROFILE</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

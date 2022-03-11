@@ -122,4 +122,39 @@ export default StyleSheet.create({
         marginLeft: 10,
         marginRight: 10
     },
+    friend_view: {
+        display: "flex",
+        borderStyle: "solid",
+        borderColor: "#000",
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 10
+    },
+    friend_image: {
+        width: 100, 
+        height: 100,
+        display: "flex",
+        justifyContent: "flex-start",
+        borderRadius: 100,
+        margin: "5px"
+    },
+    friend_text: {
+        display: "flex",
+        justifyContent: "center",
+        marginLeft: "10px"
+    },
+    friend_profileview: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        paddingBottom: 10
+    },
+    viewprofile_button: {
+        alignSelf: "flex-end",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        marginLeft: 100,
+        width: 100
+    },
 });

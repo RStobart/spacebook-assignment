@@ -184,10 +184,18 @@ class Post extends Component {
                             <Text>{this.props.post.numLikes} {likeText}</Text>
                         </View>
                         <View style={style.post_buttonview}>
-                            <TouchableOpacity style={style.post_button} onPress={() => this.like()} ><Text>LIKE</Text></TouchableOpacity>
-                            <TouchableOpacity style={style.post_button} onPress={() => this.unlike()} ><Text>UNLIKE</Text></TouchableOpacity>
-                            <TouchableOpacity style={style.post_button} onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} ><Text>EDIT POST</Text></TouchableOpacity>
-                            <TouchableOpacity style={style.post_button} onPress={() => this.delete()} ><Text>DELETE POST</Text></TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.like()} >
+                                <Text>LIKE</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.unlike()} >
+                                <Text>UNLIKE</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.props.navigation.navigate("EditPost", { post: this.props.post })} >
+                                <Text>EDIT POST</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={style.post_button} onPress={() => this.delete()} >
+                                <Text>DELETE POST</Text>
+                            </TouchableOpacity>
                         </View>
                     </View>
                     <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}

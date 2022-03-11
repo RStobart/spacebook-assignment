@@ -60,5 +60,29 @@ export default StyleSheet.create({
     },
     editpost_text: {
         paddingLeft: 5
-    }
+    },
+    createpost_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    createpost_button: {
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        marginLeft: 10,
+        marginRight: 10,
+        paddingTop: 10,
+        paddingBottom: 10,
+        width: 125
+    },
+    createpost_buttontext: {
+        alignSelf: "center"
+    },
+    createpost_buttonview: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    createpost_text: {
+        paddingLeft: 10
+    },
 });

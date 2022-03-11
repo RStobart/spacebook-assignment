@@ -1,10 +1,11 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class CreatePostScreen extends Component {
 
@@ -34,6 +35,7 @@ class CreatePostScreen extends Component {
         })
             .then((response) => {
                 if (response.status === 201) {
+                    this.setState({text: ""});
                     this.props.navigation.navigate("ProfileNav");
                 } else if (response.status === 401) {
                     this.removeLoginDetails();
@@ -70,6 +72,7 @@ class CreatePostScreen extends Component {
         tempDrafts.push({ "draftId": (tempDrafts.length + 1), "text": this.state.text });
         await AsyncStorage.setItem("@drafts" + userId, JSON.stringify(tempDrafts))
         .then(() => {
+            this.setState({text: ""});
             this.props.navigation.navigate("Draft posts");
         });
     }
@@ -77,11 +80,13 @@ class CreatePostScreen extends Component {
     render() {
 
         return (
-            <View>
-                <Text>What do you want to say?</Text>
+            <View style={style.createpost_view}>
+                <Text style={style.createpost_text}>What do you want to say?</Text>
                 <TextInput accessible={true} accessibilityLabel="Text input for post" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.text} onChangeText={(text) => this.setState({ text })} />
-                <Button accessible={true} accessibilityLabel="Create post" title="Create post" onPress={() => this.post()} />
-                <Button accessible={true} accessibilityLabel="Save as draft" title="Save as draft" onPress={() => this.saveDraft()} />
+                <View style={style.createpost_buttonview}>
+                    <TouchableOpacity style={style.createpost_button} accessible={true} accessibilityLabel="Create post" onPress={() => this.post()}><Text style={style.createpost_buttontext}>CREATE POST</Text></TouchableOpacity>
+                    <TouchableOpacity style={style.createpost_button} accessible={true} accessibilityLabel="Save as draft" onPress={() => this.saveDraft()}><Text style={style.createpost_buttontext}>SAVE AS DRAFT</Text></TouchableOpacity>
+                </View>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

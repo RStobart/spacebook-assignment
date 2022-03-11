@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FriendRequest from '../components/friendrequest.js';
 import {Restart} from 'fiction-expo-restart';
@@ -73,7 +73,7 @@ class FriendReqScreen extends Component{
         }
         else{
             return(
-                <View>
+                <ScrollView>
                     {requestList}
 
                     <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
@@ -87,7 +87,7 @@ class FriendReqScreen extends Component{
                              });
                         }}
                     />
-                </View>
+                </ScrollView>
             )
         }
     }

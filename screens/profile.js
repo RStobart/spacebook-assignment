@@ -1,5 +1,5 @@
 import { Component } from "react/cjs/react.production.min";
-import { View, Text, Image } from "react-native";
+import { ScrollView, Text, Image } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Post from '../components/post.js';
 import { Restart } from "fiction-expo-restart";
@@ -185,7 +185,7 @@ class ProfileScreen extends Component{
         });
 
         return(
-            <View>
+            <ScrollView>
                 <Image source={{uri: this.state.user_photo}} style={{width: 100, height: 100}}/>
                 <Text>Name: {this.state.user_info.first_name} {this.state.user_info.last_name}</Text>
                 <Text>{this.state.user_info.friend_count} friends</Text>
@@ -203,7 +203,7 @@ class ProfileScreen extends Component{
                              });
                         }}
                     />
-            </View>
+            </ScrollView>
         )
     }
 }

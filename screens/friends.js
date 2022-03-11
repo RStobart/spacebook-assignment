@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Friend from "../components/friend.js";
@@ -76,7 +76,7 @@ class FriendsScreen extends Component {
         }
 
         return (
-            <View>
+            <ScrollView>
                 {friendResults}
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
@@ -90,7 +90,7 @@ class FriendsScreen extends Component {
                              });
                         }}
                     />
-            </View>
+            </ScrollView>
         )
     }
 

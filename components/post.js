@@ -175,7 +175,7 @@ class Post extends Component {
             return(<View />)
         }else if (this.props.logged_user_id == this.props.post.author.user_id) {
             return (
-                <View style={style.post}>
+                <View style={style.post_view}>
                     <View style={style.inner_post}>
                         <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                         <Text>{this.props.post.text}</Text>
@@ -206,7 +206,7 @@ class Post extends Component {
         }
         else {
             return (
-                <View style={style.post}>
+                <View style={style.post_view}>
                     <View style={style.inner_post}>
                         <Text>{this.props.post.author.first_name} {this.props.post.author.last_name} wrote:</Text>
                         <Text>{this.props.post.text}</Text>

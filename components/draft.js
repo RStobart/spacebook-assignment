@@ -1,6 +1,7 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text } from "react-native";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
+import style from '../style/style.js';
 
 class Draft extends Component {
     constructor(props) {
@@ -9,10 +10,14 @@ class Draft extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Draft {this.props.draft.draftId}</Text>
-                <Text>{this.props.draft.text}</Text>
-                <Button accessible={true} accessibilityLabel="Manage draft" title="Manage draft" onPress={() => this.props.navigation.navigate("ManageDraft", { draft: this.props.draft })} />
+            <View style={style.draft_view}>
+                <View style={style.inner_draft}>
+                    <Text>Draft {this.props.draft.draftId}</Text>
+                    <Text>{this.props.draft.text}</Text>
+                    <TouchableOpacity style={style.draft_button} accessible={true} accessibilityLabel="Manage draft" onPress={() => this.props.navigation.navigate("ManageDraft", { draft: this.props.draft })}>
+                        <Text>MANAGE DRAFT</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }

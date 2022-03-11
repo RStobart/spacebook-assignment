@@ -2,6 +2,7 @@ import { Component } from "react/cjs/react.production.min";
 import { View, Text, ScrollView } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Draft from '../components/draft.js';
+import style from '../style/style.js';
 
 class DraftsScreen extends Component {
 

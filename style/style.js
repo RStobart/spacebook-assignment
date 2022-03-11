@@ -21,7 +21,7 @@ export default StyleSheet.create({
         alignItems: "center",
         paddingBottom: 10
     },
-    post: {
+    post_view: {
         display: "flex",
         borderStyle: "solid",
         borderColor: "#000",
@@ -84,5 +84,42 @@ export default StyleSheet.create({
     },
     createpost_text: {
         paddingLeft: 10
+    },
+    draft_view: {
+        display: "flex",
+        borderStyle: "solid",
+        borderColor: "#000",
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: 10
+    },
+    draft_button: {
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 115
+    },
+    inner_draft: {
+        padding: 5
+    },
+    managedraft_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    managedraft_text: {
+        paddingLeft: 5
+    },
+    managedraft_buttonview: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    managedraft_button: {
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 105,
+        marginLeft: 10,
+        marginRight: 10
     },
 });

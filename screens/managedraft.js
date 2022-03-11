@@ -1,8 +1,9 @@
 import { Component } from "react/cjs/react.production.min";
 import { View, Text, TextInput } from "react-native";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class ManageDraftScreen extends Component {
     constructor(props) {
@@ -97,12 +98,20 @@ class ManageDraftScreen extends Component {
 
     render() {
         return (
-            <View>
-                <Text>Draft {this.props.route.params.draft.draftId}</Text>
+            <View style={style.managedraft_view}>
+                <Text style={style.managedraft_text}>Draft {this.props.route.params.draft.draftId}</Text>
                 <TextInput style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.text} onChangeText={(text) => this.setState({ text })} />
-                <Button accessible={true} accessibilityLabel="Create post" title="Create post" onPress={() => this.post()} />
-                <Button accessible={true} accessibilityLabel="Update draft" title="Update draft" onPress={() => this.updateDraft(this.state.text)} />
-                <Button accessible={true} accessibilityLabel="Delete draft" title="Delete draft" onPress={() => this.deleteDraftClick()} />
+                <View style={style.managedraft_buttonview}>
+                    <TouchableOpacity style={style.managedraft_button} accessible={true} accessibilityLabel="Create post" onPress={() => this.post()}>
+                        <Text>CREATE POST</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={style.managedraft_button} accessible={true} accessibilityLabel="Update draft" onPress={() => this.updateDraft(this.state.text)}>
+                        <Text>UPDATE DRAFT</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={style.managedraft_button} accessible={true} accessibilityLabel="Delete draft" onPress={() => this.deleteDraftClick()}>
+                        <Text>DELETE DRAFT</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

@@ -1,9 +1,10 @@
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
+import { TouchableOpacity } from "react-native-web";
 import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -62,13 +63,19 @@ class LoginScreen extends Component {
         this.checkForLogin();
 
         return (
-            <View>
-                <Text>Enter email:</Text>
+            <View style={style.login_view}>
+                <Text style={style.login_text}>Enter email:</Text>
                 <TextInput accessible={true} accessibilityLabel="Email field" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.email} onChangeText={(email) => this.setState({ email })} />
-                <Text>Enter password:</Text>
+                <Text style={style.login_text}>Enter password:</Text>
                 <TextInput accessible={true} accessibilityLabel="Password field" style={{ padding: 5, borderWidth: 1, margin: 5 }} value={this.state.password} onChangeText={(password) => this.setState({ password })} secureTextEntry />
-                <Button accessible={true} accessibilityLabel="Log in" onPress={() => this.login()} title="Login" />
-                <Button accessible={true} accessibilityLabel="Sign up and create and account" onPress={() => this.props.navigation.navigate("Signup")} title="Dont have an account?" />
+                <View style={style.login_buttonview}>
+                    <TouchableOpacity style={style.login_button} accessible={true} accessibilityLabel="Log in" onPress={() => this.login()}>
+                        <Text>LOGIN</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={style.login_button} accessible={true} accessibilityLabel="Sign up and create and account" onPress={() => this.props.navigation.navigate("Signup")}>
+                        <Text>DON'T HAVE AN ACCOUNT?</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

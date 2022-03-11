@@ -1,10 +1,11 @@
 import { TextInput } from "react-native-gesture-handler";
-import { Button } from "react-native-web";
-import { View } from "react-native";
+import { TouchableOpacity } from "react-native-web";
+import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class SignupScreen extends Component {
     constructor(props){
@@ -75,16 +76,18 @@ class SignupScreen extends Component {
 
     render(){
         return(
-            <View>
-                <Text>First name:</Text>
+            <View style={style.signup_view}>
+                <Text style={style.signup_text}>First name:</Text>
                 <TextInput accessible={true} accessibilityLabel="First name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.first_name} onChangeText={(first_name) => this.setState({first_name})} />
-                <Text>Last name:</Text>
+                <Text style={style.signup_text}>Last name:</Text>
                 <TextInput accessible={true} accessibilityLabel="Last name field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.last_name} onChangeText={(last_name) => this.setState({last_name})} />
-                <Text>Email:</Text>
+                <Text style={style.signup_text}>Email:</Text>
                 <TextInput accessible={true} accessibilityLabel="Email field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.email} onChangeText={(email) => this.setState({email})} />
-                <Text>Password:</Text>
+                <Text style={style.signup_text}>Password:</Text>
                 <TextInput accessible={true} accessibilityLabel="Password field" style={{padding:5, borderWidth:1, margin:5}} value={this.state.password} onChangeText={(password) => this.setState({password})} secureTextEntry />
-                <Button accessible={true} accessibilityLabel="Create account" onPress={() => this.login()} title="Create account" />
+                <TouchableOpacity style={style.signup_button} accessible={true} accessibilityLabel="Create account" onPress={() => this.login()}>
+                    <Text>CREATE ACCOUNT</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

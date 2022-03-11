@@ -291,6 +291,10 @@ export default StyleSheet.create({
     editpassword_text: {
         paddingLeft: 5
     },
+    editphoto_view: {
+        display: "flex",
+        paddingTop: 10
+    },
     editphoto_button: {
         display: "flex",
         alignItems: "center",
@@ -301,4 +305,60 @@ export default StyleSheet.create({
         alignSelf: "center",
         marginTop: 10
     },
+    logout_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    logout_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 225,
+        alignSelf: "center",
+        marginTop: 10
+    },
+    login_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    login_buttonview: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 10
+    },
+    login_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 150,
+        alignSelf: "center",
+        marginLeft: 10,
+        marginRight: 10
+    },
+    login_text: {
+        paddingLeft: 5
+    },
+    signup_view: {
+        display: "flex",
+        paddingTop: 10
+    },
+    signup_button: {
+        display: "flex",
+        alignItems: "center",
+        borderRadius: 15,
+        backgroundColor: "lightblue",
+        padding: 5,
+        width: 225,
+        alignSelf: "center",
+        marginTop: 10
+    },
+    signup_text: {
+        paddingLeft: 5
+    }
 });

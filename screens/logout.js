@@ -1,9 +1,10 @@
-import { Button } from "react-native-web";
-import { View } from "react-native";
+import { TouchableOpacity } from "react-native-web";
+import { View, Text } from "react-native";
 import { Component } from "react/cjs/react.production.min";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Restart} from 'fiction-expo-restart';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import style from '../style/style.js';
 
 class LogoutScreen extends Component {
     constructor(props){
@@ -49,9 +50,13 @@ class LogoutScreen extends Component {
 
     render(){
         return(
-            <View>
-                <Button accessible={true} accessibilityLabel="Log out" onPress={() => {this.logout()}} title="Logout" />
-                <Button accessible={true} accessibilityLabel="Don't log out" onPress={() => {this.props.navigation.navigate("butts")}} title="Stay logged in" />
+            <View style={style.logout_view}>
+                <TouchableOpacity style={style.logout_button} accessible={true} accessibilityLabel="Log out" onPress={() => {this.logout()}}>
+                    <Text>LOGOUT</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={style.logout_button} accessible={true} accessibilityLabel="Don't log out" onPress={() => {this.props.navigation.navigate("butts")}}>
+                    <Text>STAY LOGGED IN</Text>
+                </TouchableOpacity>
 
                 <AwesomeAlert accessible={true} accessibilityLabel={this.state.alertText}
                         show={this.state.showAlert}

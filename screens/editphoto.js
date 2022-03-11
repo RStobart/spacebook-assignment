@@ -81,7 +81,7 @@ class EditPhotoScreen extends Component{
 
     render(){
         return(
-            <View>
+            <View style={style.editphoto_view}>
                 <TouchableOpacity style={style.editphoto_button} accessible={true} accessibilityLabel="Choose new profile photo" onPress={() => this.choosePhoto()}>
                     <Text>CHOOSE A NEW PROFILE PHOTO</Text>
                 </TouchableOpacity>

@@ -39,6 +39,7 @@ class ProfileScreen extends Component {
     } else {
       this.loadDetailsAndPosts(this.props.route.params.userId);
     }
+    this.props.navigation.addListener('focus', () => this.loadDetailsAndPosts(this.state.userInfo.user_id));
   };
 
   getUserDetails = async (userId) => {
@@ -77,9 +78,6 @@ class ProfileScreen extends Component {
       })
       .then(async (userInfo) => {
         this.setState({ userInfo });
-      })
-      .then(async () => {
-        this.props.navigation.addListener('focus', () => this.loadDetailsAndPosts(this.state.userInfo.user_id));
       });
   };
 

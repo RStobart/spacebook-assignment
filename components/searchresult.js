@@ -28,7 +28,7 @@ class SearchResult extends Component {
       Restart();
     })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
           this.setState({
             showAlert: true,
             alertText: 'Friend request sent!',
